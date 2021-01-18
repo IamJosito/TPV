@@ -31,6 +31,8 @@ public class Pantalla_Administrador extends javax.swing.JFrame {
     ArrayList productosParaEliminar = new ArrayList();
     Border bordePorDefecto;
     
+    Empleado empleadoLogeado;
+    
     public Pantalla_Administrador() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -38,6 +40,16 @@ public class Pantalla_Administrador extends javax.swing.JFrame {
         bordePorDefecto = txtAreaDescripProd_panelAdministrarProd.getBorder();
         this.cargarProductos();
         
+
+    }
+    
+    public Pantalla_Administrador(Empleado emp) {
+        initComponents();
+        this.setLocationRelativeTo(null);
+        panelAddEditProd_Administrador.setVisible(false);
+        bordePorDefecto = txtAreaDescripProd_panelAdministrarProd.getBorder();
+        this.cargarProductos();
+        this.empleadoLogeado=emp; 
 
     }
 
@@ -510,7 +522,7 @@ public class Pantalla_Administrador extends javax.swing.JFrame {
 
     private void btnAdministrar_AdministradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdministrar_AdministradorActionPerformed
         // TODO add your handling code here       
-        gp.creaAdministrarUsuario();
+        gp.creaAdministrarUsuario(empleadoLogeado);
         dispose();
     }//GEN-LAST:event_btnAdministrar_AdministradorActionPerformed
 
@@ -522,7 +534,7 @@ public class Pantalla_Administrador extends javax.swing.JFrame {
 
     private void btnEmpleado_AdministradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmpleado_AdministradorActionPerformed
         // TODO add your handling code here:
-        gp.creaSeleccionProducto();
+        gp.creaSeleccionProducto(empleadoLogeado);
         dispose();
     }//GEN-LAST:event_btnEmpleado_AdministradorActionPerformed
 

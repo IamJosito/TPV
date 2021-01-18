@@ -7,11 +7,18 @@ import javax.swing.JTextField;
 public class Pantalla_Registro extends javax.swing.JFrame {
 
     private gestionPantallas gp;
-    
+    Empleado empleadoLogeado;
     public Pantalla_Registro() {
         initComponents();
         this.setLocationRelativeTo(null);
         gp = new gestionPantallas();
+    }
+    
+    public Pantalla_Registro(Empleado emp) {
+        initComponents();
+        this.setLocationRelativeTo(null);
+        gp = new gestionPantallas();
+        this.empleadoLogeado = emp;
     }
 
 
@@ -131,7 +138,7 @@ public class Pantalla_Registro extends javax.swing.JFrame {
             emp.setPassword(encriptar.getMD5String(new String(txtPasswd_Reagistrar.getPassword())));
 
             if (us.registro(emp)) {
-                gp.creaAdministrarUsuario();
+                gp.creaAdministrarUsuario(empleadoLogeado);
                 dispose();
             }else{
                 errorCampos.setText("ERROR USUARIO EXISTENTE");
@@ -145,7 +152,7 @@ public class Pantalla_Registro extends javax.swing.JFrame {
 
     private void btnVolver_RegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolver_RegistroActionPerformed
         // TODO add your handling code here:
-        gp.creaAdministrarUsuario();
+        gp.creaAdministrarUsuario(empleadoLogeado);
         dispose();
     }//GEN-LAST:event_btnVolver_RegistroActionPerformed
 

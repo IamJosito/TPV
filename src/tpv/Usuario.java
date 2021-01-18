@@ -214,4 +214,23 @@ public class Usuario {
         return empleados;
     } 
     
+    public boolean comprobarAdmin(Empleado emp){
+        boolean esAdmin = false;
+        try {
+            this.conexion();
+            
+            String sql = "SELECT * FROM usuarios WHERE correo = '" + emp.getCorreo() + "'";
+            ResultSet rs = sentencia.executeQuery(sql);
+            while (rs.next()) {       
+                if(rs.getBoolean("esAdmin")){
+                    esAdmin = true;
+                }
+            }
+            this.desconexion();
+        } catch (SQLException ex) {
+            Logger.getLogger(Usuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return esAdmin;
+    }
+    
 }

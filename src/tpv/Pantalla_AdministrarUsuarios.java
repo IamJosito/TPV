@@ -18,6 +18,7 @@ public class Pantalla_AdministrarUsuarios extends javax.swing.JFrame {
     boolean buscadorVisible = false;
     Usuario usuario = new Usuario();
     ArrayList <Empleado> empleados = usuario.leerEmpleados();
+    Empleado empleadoLogeado;
     
     public Pantalla_AdministrarUsuarios() {
         initComponents();
@@ -25,6 +26,15 @@ public class Pantalla_AdministrarUsuarios extends javax.swing.JFrame {
         gp = new gestionPantallas();
         txtBuscador.setVisible(buscadorVisible);
         this.cargarEmpleados();
+    }
+    
+    public Pantalla_AdministrarUsuarios(Empleado emp) {
+        initComponents();
+        this.setLocationRelativeTo(null);
+        gp = new gestionPantallas();
+        txtBuscador.setVisible(buscadorVisible);
+        this.cargarEmpleados();
+        this.empleadoLogeado = emp;
     }
 
     /**
@@ -211,7 +221,7 @@ public class Pantalla_AdministrarUsuarios extends javax.swing.JFrame {
     private void btnAnadirEmp_AdministrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnadirEmp_AdministrarActionPerformed
         // TODO add your handling code here:
 
-        gp.creaRegistro();
+        gp.creaRegistro(empleadoLogeado);
         dispose();
     }//GEN-LAST:event_btnAnadirEmp_AdministrarActionPerformed
 
@@ -227,7 +237,7 @@ public class Pantalla_AdministrarUsuarios extends javax.swing.JFrame {
     private void btnVolver_Administrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolver_Administrar1ActionPerformed
         // TODO add your handling code here:
 
-        gp.creaAdministrador();
+        gp.creaAdministrador(empleadoLogeado);
         dispose();
     }//GEN-LAST:event_btnVolver_Administrar1ActionPerformed
 
