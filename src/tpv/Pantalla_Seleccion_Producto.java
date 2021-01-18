@@ -13,6 +13,9 @@ import javax.swing.border.Border;
 public class Pantalla_Seleccion_Producto extends javax.swing.JFrame {
 
     private gestionPantallas gp;
+
+    private Usuario us = new Usuario();
+    Empleado empleadoLogeado = new Empleado();
     Almacen almc = new Almacen();
     
     public Pantalla_Seleccion_Producto() {
@@ -87,6 +90,15 @@ public class Pantalla_Seleccion_Producto extends javax.swing.JFrame {
         panelProductos_SelecProd.revalidate();
         panelProductos_SelecProd.repaint();
         
+    }
+    
+    public Pantalla_Seleccion_Producto(Empleado emp) {
+        initComponents();
+        this.setLocationRelativeTo(null);
+        panelCategorias.setVisible(false);
+        gp = new gestionPantallas();
+        this.empleadoLogeado=emp; 
+        System.out.println(empleadoLogeado.getCorreo());
     }
 
  
@@ -229,7 +241,7 @@ public class Pantalla_Seleccion_Producto extends javax.swing.JFrame {
 
     private void btnCarrito_SelecProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarrito_SelecProdActionPerformed
         // TODO add your handling code here
-        gp.creaCarrito();
+        gp.creaCarrito(empleadoLogeado);
         dispose();
     }//GEN-LAST:event_btnCarrito_SelecProdActionPerformed
 
@@ -277,8 +289,12 @@ public class Pantalla_Seleccion_Producto extends javax.swing.JFrame {
 
     private void btnAdmin_SelecProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdmin_SelecProdActionPerformed
         // TODO add your handling code here:
-        gp.creaAdministrador();
-        dispose();
+        if (us.comprobarAdmin(empleadoLogeado)) {
+            gp.creaAdministrador(empleadoLogeado);
+            dispose();
+        } else {
+            System.out.println("Debes de ser admin");
+        }
     }//GEN-LAST:event_btnAdmin_SelecProdActionPerformed
 
 

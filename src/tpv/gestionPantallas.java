@@ -2,10 +2,9 @@ package tpv;
 
 
 public class gestionPantallas {
-  
     
-    protected void creaSeleccionProducto(){
-        Pantalla_Seleccion_Producto psp = new Pantalla_Seleccion_Producto();
+    protected void creaSeleccionProducto(Empleado emp){
+        Pantalla_Seleccion_Producto psp = new Pantalla_Seleccion_Producto(emp);
         psp.setVisible(true);
     }
     
@@ -14,22 +13,22 @@ public class gestionPantallas {
         pl.setVisible(true);
     }
     
-    protected void creaRegistro(){
-        Pantalla_Registro pr = new Pantalla_Registro();
+    protected void creaRegistro(Empleado emp){
+        Pantalla_Registro pr = new Pantalla_Registro(emp);
         pr.setVisible(true);
     }    
     
-    protected void creaCarrito(){
-        Pantalla_Carrito pc = new Pantalla_Carrito();
+    protected void creaCarrito(Empleado emp){
+        Pantalla_Carrito pc = new Pantalla_Carrito(emp);
         pc.setVisible(true);
     }   
-    protected void creaAdministrador(){
-        Pantalla_Administrador pa = new Pantalla_Administrador();
+    protected void creaAdministrador(Empleado emp){
+        Pantalla_Administrador pa = new Pantalla_Administrador(emp);
         pa.setVisible(true);
     }
     
-    protected void creaAdministrarUsuario(){
-        Pantalla_AdministrarUsuarios pau = new Pantalla_AdministrarUsuarios();
+    protected void creaAdministrarUsuario(Empleado emp){
+        Pantalla_AdministrarUsuarios pau = new Pantalla_AdministrarUsuarios(emp);
         pau.setVisible(true);
     }
 }

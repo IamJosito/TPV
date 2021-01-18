@@ -8,6 +8,7 @@ public class Pantalla_LogIn extends javax.swing.JFrame {
     Usuario us = new Usuario();
     Encriptacion md5 = new Encriptacion();
     private gestionPantallas gp;
+    
     public Pantalla_LogIn() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -15,7 +16,8 @@ public class Pantalla_LogIn extends javax.swing.JFrame {
     }
 
     @SuppressWarnings("unchecked")
-    private void initComponents() {//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
 
         btn_Entrar_LogIn = new javax.swing.JButton();
         lbl_Icono = new javax.swing.JLabel();
@@ -60,29 +62,21 @@ public class Pantalla_LogIn extends javax.swing.JFrame {
         getContentPane().add(txtPasswd_Login, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 340, 230, 40));
 
         pack();
-    }//GEN-END:initComponents
+    }// </editor-fold>//GEN-END:initComponents
 
     private void btn_Entrar_LogInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Entrar_LogInActionPerformed
-        
-        
             String email = txtEmail.getText();
             String password = new String(txtPasswd_Login.getPassword());
             password = md5.getMD5String(password);
-            
             emp.setCorreo(email);
             emp.setPassword(password);
-            
             if(us.login(emp)){
                 System.out.println("Usuario y contraseña correcto");
-                gp.creaSeleccionProducto();
+                gp.creaSeleccionProducto(emp);
                 dispose();
             }else{
                 System.err.println("Usuario y contraseña incorrecto");
             }
-            
-        
-        
-        
     }//GEN-LAST:event_btn_Entrar_LogInActionPerformed
 
     private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed

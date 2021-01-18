@@ -3,11 +3,19 @@ package tpv;
 public class Pantalla_Carrito extends javax.swing.JFrame {
 
     private gestionPantallas gp;
+    Empleado empleadoLogeado;
     
     public Pantalla_Carrito() {
         initComponents();
         this.setLocationRelativeTo(null);
         gp = new gestionPantallas();
+    }
+    
+    public Pantalla_Carrito(Empleado emp) {
+        initComponents();
+        this.setLocationRelativeTo(null);
+        gp = new gestionPantallas();
+        this.empleadoLogeado = emp;
     }
 
 
@@ -94,7 +102,7 @@ public class Pantalla_Carrito extends javax.swing.JFrame {
 
     private void btnVolver_CarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolver_CarritoActionPerformed
         // TODO add your handling code here:
-        gp.creaSeleccionProducto();
+        gp.creaSeleccionProducto(empleadoLogeado);
         dispose();
     }//GEN-LAST:event_btnVolver_CarritoActionPerformed
 
