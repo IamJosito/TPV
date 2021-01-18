@@ -1,16 +1,95 @@
 package tpv;
 
+import java.awt.Color;
+import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.border.Border;
+
 public class Pantalla_Seleccion_Producto extends javax.swing.JFrame {
 
     private gestionPantallas gp;
+
     private Usuario us = new Usuario();
     Empleado empleadoLogeado = new Empleado();
+    Almacen almc = new Almacen();
     
     public Pantalla_Seleccion_Producto() {
         initComponents();
         this.setLocationRelativeTo(null);
         panelCategorias.setVisible(false);
         gp = new gestionPantallas();
+        this.cargarProductos();
+    }
+    
+    public void cargarProductos(){
+        
+        //Eliminamos todos los componentes de nuestro panel de productos, por si acaso tenemos alguno
+        panelProductos_SelecProd.removeAll();
+        
+        Almacen almacen = new Almacen();
+        ArrayList <Producto> productos = almacen.mostrarProducto();
+        int posX = 10;
+        int posY = 10;
+        
+        
+        for (int i = 0; i < productos.size(); i++) {
+            
+            //Para dar un salto a la siguiente linea al mostrar nuestros productos.
+            if(posX >= 870){
+                posY += 170;
+                posX = 10;
+            }
+            
+            //Obtenemos las imagenes de nuestros productos
+            ImageIcon imgen = productos.get(i).getImagen();
+
+            //Para reescalar la imagen al tamaño del label
+            Image img = imgen.getImage();
+            Image myImg = img.getScaledInstance(150, 150, Image.SCALE_SMOOTH);
+            ImageIcon newImage = new ImageIcon(myImg);
+            //----------------------------------------------------
+            
+            //Por cada producto vamos a crear un Label para añadirlo al panel.
+            JLabel imgProducto = new JLabel(newImage);
+            //Le seteamos de nombre el codigo de producto para que sea unico y no de fallos.
+            imgProducto.setName(String.valueOf(productos.get(i).getCodigoProducto()));
+            //Mouse listener para cuando cliquemos.
+            imgProducto.addMouseListener(new MouseAdapter() {
+                boolean estaSeleccionado = false;
+                public void mouseClicked(MouseEvent e){
+                    //si no ha sido clickado le ponemos un borde y lo añadimos al array de eliminar producto
+                    if(!estaSeleccionado){
+                        Border border = BorderFactory.createLineBorder(Color.BLUE, 5);
+                        imgProducto.setBorder(border);
+                        
+                        estaSeleccionado = true;
+                    }else{
+                        //Si ya habiamos clickado, le quitamos el borde y eliminamos ese producto de nuestro producto
+                        //Como el nombre es un Integer, obtenemos el nombre, lo convertimos en numero y buscamos
+                        //la posicion de ese indice para borrar esa posicion del array.
+                        imgProducto.setBorder(null);
+                        
+                        estaSeleccionado = false;
+                    }
+                }
+            });
+            
+            //agregamos la label a nuestro panel.
+            panelProductos_SelecProd.add(imgProducto,new org.netbeans.lib.awtextra.AbsoluteConstraints(posX, posY, 150, 150));
+            posX += 170;
+            //870 limite en X
+            
+        }
+        System.out.println(panelProductos_SelecProd.getComponentCount());
+        //revalidamos y repintamos el panel.
+        panelProductos_SelecProd.revalidate();
+        panelProductos_SelecProd.repaint();
+        
     }
     
     public Pantalla_Seleccion_Producto(Empleado emp) {
@@ -168,31 +247,37 @@ public class Pantalla_Seleccion_Producto extends javax.swing.JFrame {
 
     private void btnCategoriaS_SelecProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriaS_SelecProdActionPerformed
         // TODO add your handling code here:
+        almc.mostrarProducto("stock");
         panelCategorias.setVisible(false);
     }//GEN-LAST:event_btnCategoriaS_SelecProdActionPerformed
 
     private void btnCategoriaM_SelecProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriaM_SelecProdActionPerformed
         // TODO add your handling code here:
+        almc.mostrarProductoGenero("m");
         panelCategorias.setVisible(false);
     }//GEN-LAST:event_btnCategoriaM_SelecProdActionPerformed
 
     private void btnCategoriaU_SelecProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriaU_SelecProdActionPerformed
         // TODO add your handling code here:
+        almc.mostrarProductoGenero("u");
         panelCategorias.setVisible(false);
     }//GEN-LAST:event_btnCategoriaU_SelecProdActionPerformed
 
     private void btnCategoriaP_SelecProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriaP_SelecProdActionPerformed
         // TODO add your handling code here:
+        almc.mostrarProducto("precio");
         panelCategorias.setVisible(false);
     }//GEN-LAST:event_btnCategoriaP_SelecProdActionPerformed
 
     private void btnCategoriaA_SelecProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriaA_SelecProdActionPerformed
         // TODO add your handling code here:
+        almc.mostrarProducto("nombre");
         panelCategorias.setVisible(false);
     }//GEN-LAST:event_btnCategoriaA_SelecProdActionPerformed
 
     private void btnCategoriaH_SelecProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriaH_SelecProdActionPerformed
         // TODO add your handling code here:
+        almc.mostrarProductoGenero("h");
         panelCategorias.setVisible(false);
     }//GEN-LAST:event_btnCategoriaH_SelecProdActionPerformed
 
@@ -235,6 +320,30 @@ public class Pantalla_Seleccion_Producto extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Pantalla_Seleccion_Producto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
