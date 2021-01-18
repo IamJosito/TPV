@@ -194,4 +194,67 @@ public class Almacen {
         return null;
     }
     
+    public ArrayList<Producto> mostrarProducto(String order){
+        try {
+            this.conexion();
+            
+            String recibirTodosProductos = "SELECT * FROM almacen ORDER BY " + order;
+            ResultSet rs = sentencia.executeQuery(recibirTodosProductos);
+            ArrayList<Producto> productos = new ArrayList();
+            
+            while(rs.next()) {
+                Producto prod = new Producto();
+                byte[] blob = rs.getBytes("imagen");
+                ImageIcon imageIcon = new ImageIcon(blob);
+                
+                prod.setCodigoProducto(rs.getInt("codigoProducto"));
+                prod.setPrecio(rs.getInt("precio"));
+                prod.setStock(rs.getInt("stock"));
+                prod.setNombre(rs.getString("nombre"));
+                prod.setDescripcion(rs.getString("descripcion"));
+                prod.setImagen(imageIcon);
+                prod.setGenero(rs.getString("genero"));
+                
+                productos.add(prod);
+            }
+            
+            this.desconexion();
+            return productos;
+        } catch (SQLException ex) {
+            Logger.getLogger(Almacen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    public ArrayList<Producto> mostrarProductoGenero(String genero){
+        try {
+            this.conexion();
+            
+            String recibirTodosProductos = "SELECT * FROM almacen ORDER BY " + genero;
+            ResultSet rs = sentencia.executeQuery(recibirTodosProductos);
+            ArrayList<Producto> productos = new ArrayList();
+            
+            while(rs.next()) {
+                Producto prod = new Producto();
+                byte[] blob = rs.getBytes("imagen");
+                ImageIcon imageIcon = new ImageIcon(blob);
+                
+                prod.setCodigoProducto(rs.getInt("codigoProducto"));
+                prod.setPrecio(rs.getInt("precio"));
+                prod.setStock(rs.getInt("stock"));
+                prod.setNombre(rs.getString("nombre"));
+                prod.setDescripcion(rs.getString("descripcion"));
+                prod.setImagen(imageIcon);
+                prod.setGenero(rs.getString("genero"));
+                
+                productos.add(prod);
+            }
+            
+            this.desconexion();
+            return productos;
+        } catch (SQLException ex) {
+            Logger.getLogger(Almacen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 }
