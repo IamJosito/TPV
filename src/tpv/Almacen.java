@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.sql.*; 
+import java.util.HashMap;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -249,6 +250,46 @@ public class Almacen {
                 
                 productos.add(prod);
             }
+            
+            this.desconexion();
+            return productos;
+        } catch (SQLException ex) {
+            Logger.getLogger(Almacen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    
+    /**
+     * @see Obtener X productos de la DB
+     */
+    public ArrayList mostrarProducto(HashMap<Integer,Integer> carritoProductos){
+        try {
+            this.conexion();
+            ArrayList<Producto> productos = new ArrayList();
+            
+            for(Integer k : carritoProductos.keySet()){
+                String recibirTodosProductos = "SELECT * FROM almacen WHERE codigoProducto = " + k;
+                ResultSet rs = sentencia.executeQuery(recibirTodosProductos);
+                
+
+                while(rs.next()) {
+                    Producto prod = new Producto();
+                    byte[] blob = rs.getBytes("imagen");
+                    ImageIcon imageIcon = new ImageIcon(blob);
+
+                    prod.setCodigoProducto(rs.getInt("codigoProducto"));
+                    prod.setPrecio(rs.getInt("precio"));
+                    prod.setStock(rs.getInt("stock"));
+                    prod.setNombre(rs.getString("nombre"));
+                    prod.setDescripcion(rs.getString("descripcion"));
+                    prod.setImagen(imageIcon);
+                    prod.setGenero(rs.getString("genero"));
+
+                    productos.add(prod);
+                }
+            }
+            
             
             this.desconexion();
             return productos;

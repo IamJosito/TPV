@@ -91,6 +91,9 @@ public class Pantalla_Administrador extends javax.swing.JFrame {
             JLabel imgProducto = new JLabel(newImage);
             //Le seteamos de nombre el codigo de producto para que sea unico y no de fallos.
             imgProducto.setName(String.valueOf(productos.get(i).getCodigoProducto()));
+            
+            JLabel datosProducto = new JLabel("<HTML>Codigo: "+String.valueOf(productos.get(i).getCodigoProducto()) +" <br> "+ String.valueOf(productos.get(i).getNombre()) +"</HTML>");
+            
             //Mouse listener para cuando cliquemos.
             imgProducto.addMouseListener(new MouseAdapter() {
                 boolean estaSeleccionado = false;
@@ -114,6 +117,7 @@ public class Pantalla_Administrador extends javax.swing.JFrame {
             
             //agregamos la label a nuestro panel.
             panelProductos_Administrador.add(imgProducto,new org.netbeans.lib.awtextra.AbsoluteConstraints(posX, posY, 150, 150));
+            panelProductos_Administrador.add(datosProducto,new org.netbeans.lib.awtextra.AbsoluteConstraints(posX, posY+150, 150, 30));
             posX += 170;
             //870 limite en X
             
