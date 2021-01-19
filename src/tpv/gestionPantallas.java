@@ -1,5 +1,7 @@
 package tpv;
 
+import java.util.HashMap;
+
 
 public class gestionPantallas {
     
@@ -18,8 +20,8 @@ public class gestionPantallas {
         pr.setVisible(true);
     }    
     
-    protected void creaCarrito(Empleado emp){
-        Pantalla_Carrito pc = new Pantalla_Carrito(emp);
+    protected void creaCarrito(Empleado emp, HashMap productosCarrito){
+        Pantalla_Carrito pc = new Pantalla_Carrito(emp, productosCarrito);
         pc.setVisible(true);
     }   
     protected void creaAdministrador(Empleado emp){

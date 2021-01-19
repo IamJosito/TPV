@@ -1,14 +1,12 @@
 package tpv;
 
-import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import javax.swing.BorderFactory;
+import java.util.HashMap;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.border.Border;
 
 public class Pantalla_Seleccion_Producto extends javax.swing.JFrame {
 
@@ -17,6 +15,7 @@ public class Pantalla_Seleccion_Producto extends javax.swing.JFrame {
     private Usuario us = new Usuario();
     Empleado empleadoLogeado = new Empleado();
     Almacen almc = new Almacen();
+    HashMap<Integer, Integer> productosCarrito = new HashMap();
     
     public Pantalla_Seleccion_Producto() {
         initComponents();
@@ -58,34 +57,35 @@ public class Pantalla_Seleccion_Producto extends javax.swing.JFrame {
             JLabel imgProducto = new JLabel(newImage);
             //Le seteamos de nombre el codigo de producto para que sea unico y no de fallos.
             imgProducto.setName(String.valueOf(productos.get(i).getCodigoProducto()));
+            
+            JLabel datosProducto = new JLabel("<HTML><b>Nombre:</b> "+ String.valueOf(productos.get(i).getNombre()) +" <br> <b>Cantidad:</b> "+ productosCarrito.get(Integer.parseInt(imgProducto.getName())) + " </HTML>");
+            
             //Mouse listener para cuando cliquemos.
             imgProducto.addMouseListener(new MouseAdapter() {
-                boolean estaSeleccionado = false;
+                JLabel cantidad = new JLabel("0");
+                int cantidadProductos;
                 public void mouseClicked(MouseEvent e){
-                    //si no ha sido clickado le ponemos un borde y lo añadimos al array de eliminar producto
-                    if(!estaSeleccionado){
-                        Border border = BorderFactory.createLineBorder(Color.BLUE, 5);
-                        imgProducto.setBorder(border);
-                        
-                        estaSeleccionado = true;
+                    if (!productosCarrito.containsKey(Integer.parseInt(imgProducto.getName()))) {
+                        productosCarrito.put(Integer.parseInt(imgProducto.getName()), 1);
                     }else{
-                        //Si ya habiamos clickado, le quitamos el borde y eliminamos ese producto de nuestro producto
-                        //Como el nombre es un Integer, obtenemos el nombre, lo convertimos en numero y buscamos
-                        //la posicion de ese indice para borrar esa posicion del array.
-                        imgProducto.setBorder(null);
-                        
-                        estaSeleccionado = false;
-                    }
+                        cantidadProductos = productosCarrito.get(Integer.parseInt(imgProducto.getName()));
+                        productosCarrito.put(Integer.parseInt(imgProducto.getName()), cantidadProductos+1);
+                    } 
+                    cargarProductos();
+                    
                 }
+                
             });
+            
+            
             
             //agregamos la label a nuestro panel.
             panelProductos_SelecProd.add(imgProducto,new org.netbeans.lib.awtextra.AbsoluteConstraints(posX, posY, 150, 150));
+            panelProductos_SelecProd.add(datosProducto,new org.netbeans.lib.awtextra.AbsoluteConstraints(posX, posY+150, 150, 30));
             posX += 170;
             //870 limite en X
             
         }
-        System.out.println(panelProductos_SelecProd.getComponentCount());
         //revalidamos y repintamos el panel.
         panelProductos_SelecProd.revalidate();
         panelProductos_SelecProd.repaint();
@@ -99,14 +99,14 @@ public class Pantalla_Seleccion_Producto extends javax.swing.JFrame {
         gp = new gestionPantallas();
         this.empleadoLogeado=emp; 
         System.out.println(empleadoLogeado.getCorreo());
+        this.cargarProductos();
     }
 
  
     @SuppressWarnings("unchecked")
-    private void initComponents() {//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        panelProductos_SelecProd = new javax.swing.JPanel();
         panelCategorias = new javax.swing.JPanel();
         btnCategoriaS_SelecProd = new javax.swing.JButton();
         btnCategoriaH_SelecProd = new javax.swing.JButton();
@@ -114,7 +114,8 @@ public class Pantalla_Seleccion_Producto extends javax.swing.JFrame {
         btnCategoriaU_SelecProd = new javax.swing.JButton();
         btnCategoriaP_SelecProd = new javax.swing.JButton();
         btnCategoriaA_SelecProd = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        panelProductos_SelecProd = new javax.swing.JPanel();
         panelMenuSelecProd = new javax.swing.JPanel();
         btnAdmin_SelecProd = new javax.swing.JButton();
         btnSalir_SelecProd = new javax.swing.JButton();
@@ -125,8 +126,6 @@ public class Pantalla_Seleccion_Producto extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(1024, 769));
         setSize(new java.awt.Dimension(1024, 768));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        panelProductos_SelecProd.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         panelCategorias.setBorder(javax.swing.BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(0, 0, 0)));
         panelCategorias.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -179,11 +178,9 @@ public class Pantalla_Seleccion_Producto extends javax.swing.JFrame {
         });
         panelCategorias.add(btnCategoriaA_SelecProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 220, 110, 110));
 
-        panelProductos_SelecProd.add(panelCategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 690, 380));
+        getContentPane().add(panelCategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(165, 220, 690, 380));
 
-        jButton1.setText("jButton1");
-        panelProductos_SelecProd.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 160, 90, 80));
-
+        panelProductos_SelecProd.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jScrollPane1.setViewportView(panelProductos_SelecProd);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 1030, 640));
@@ -231,7 +228,7 @@ public class Pantalla_Seleccion_Producto extends javax.swing.JFrame {
         getContentPane().add(panelMenuSelecProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1030, 130));
 
         pack();
-    }//GEN-END:initComponents
+    }// </editor-fold>//GEN-END:initComponents
 
     
     private void btnCategoria_SelecProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoria_SelecProdActionPerformed
@@ -241,13 +238,13 @@ public class Pantalla_Seleccion_Producto extends javax.swing.JFrame {
 
     private void btnCarrito_SelecProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarrito_SelecProdActionPerformed
         // TODO add your handling code here
-        gp.creaCarrito(empleadoLogeado);
+        gp.creaCarrito(empleadoLogeado, productosCarrito);
         dispose();
     }//GEN-LAST:event_btnCarrito_SelecProdActionPerformed
 
     private void btnCategoriaS_SelecProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriaS_SelecProdActionPerformed
         // TODO add your handling code here:
-        almc.mostrarProducto("stock");
+        //almc.mostrarProducto("stock");
         panelCategorias.setVisible(false);
     }//GEN-LAST:event_btnCategoriaS_SelecProdActionPerformed
 
@@ -259,7 +256,7 @@ public class Pantalla_Seleccion_Producto extends javax.swing.JFrame {
 
     private void btnCategoriaU_SelecProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriaU_SelecProdActionPerformed
         // TODO add your handling code here:
-        almc.mostrarProductoGenero("u");
+        //almc.mostrarProductoGenero("u");
         panelCategorias.setVisible(false);
     }//GEN-LAST:event_btnCategoriaU_SelecProdActionPerformed
 
@@ -277,7 +274,7 @@ public class Pantalla_Seleccion_Producto extends javax.swing.JFrame {
 
     private void btnCategoriaH_SelecProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriaH_SelecProdActionPerformed
         // TODO add your handling code here:
-        almc.mostrarProductoGenero("h");
+        //almc.mostrarProductoGenero("h");
         panelCategorias.setVisible(false);
     }//GEN-LAST:event_btnCategoriaH_SelecProdActionPerformed
 
@@ -372,7 +369,6 @@ public class Pantalla_Seleccion_Producto extends javax.swing.JFrame {
     private javax.swing.JButton btnCategoriaU_SelecProd;
     private javax.swing.JButton btnCategoria_SelecProd;
     private javax.swing.JButton btnSalir_SelecProd;
-    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel panelCategorias;
     private javax.swing.JPanel panelMenuSelecProd;
