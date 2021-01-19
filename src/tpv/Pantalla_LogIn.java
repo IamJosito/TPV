@@ -20,92 +20,72 @@ public class Pantalla_LogIn extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btn_Entrar_LogIn = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        gradientBG5 = new tpv.gradientBG();
+        button1 = new tpv.button();
         lbl_Icono = new javax.swing.JLabel();
         lblInicio = new javax.swing.JLabel();
-        txtEmail = new javax.swing.JTextField();
         txtPasswd_Login = new javax.swing.JPasswordField();
-        jLabel3 = new javax.swing.JLabel();
+        btn_Entrar_LogIn = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        gradientBG5 = new tpv.gradientBG();
+        jLabel3 = new javax.swing.JLabel();
+        txtEmail = new javax.swing.JTextField();
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1024, 768));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(1024, 768));
         setResizable(false);
         setSize(new java.awt.Dimension(1024, 768));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btn_Entrar_LogIn.setBackground(new java.awt.Color(60, 56, 58));
-        btn_Entrar_LogIn.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        btn_Entrar_LogIn.setForeground(new java.awt.Color(229, 229, 229));
-        btn_Entrar_LogIn.setText("ENTRAR");
-        btn_Entrar_LogIn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_Entrar_LogInActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btn_Entrar_LogIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 500, 210, 80));
+        gradientBG5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        button1.setText("button1");
+        gradientBG5.add(button1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 500, 210, 80));
 
         lbl_Icono.setText("ICO");
-        getContentPane().add(lbl_Icono, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 155, 50, 30));
+        gradientBG5.add(lbl_Icono, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 155, 50, 30));
 
         lblInicio.setFont(new java.awt.Font("Monotype Corsiva", 2, 36)); // NOI18N
         lblInicio.setForeground(new java.awt.Color(60, 18, 40));
         lblInicio.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblInicio.setText("INICIO SESIÓN");
-        getContentPane().add(lblInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 155, 290, 40));
-
-        txtEmail.setBackground(new java.awt.Color(60, 56, 58));
-        txtEmail.setFont(new java.awt.Font("Monotype Corsiva", 0, 18)); // NOI18N
-        txtEmail.setForeground(new java.awt.Color(229, 229, 229));
-        txtEmail.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtEmail.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtEmailActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 285, 230, 40));
+        gradientBG5.add(lblInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 155, 290, 40));
 
         txtPasswd_Login.setBackground(new java.awt.Color(60, 56, 58));
         txtPasswd_Login.setForeground(new java.awt.Color(229, 229, 229));
         txtPasswd_Login.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        getContentPane().add(txtPasswd_Login, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 400, 230, 40));
+        gradientBG5.add(txtPasswd_Login, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 400, 230, 40));
+
+        btn_Entrar_LogIn.setBackground(new java.awt.Color(60, 56, 58));
+        btn_Entrar_LogIn.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        btn_Entrar_LogIn.setForeground(new java.awt.Color(229, 229, 229));
+        btn_Entrar_LogIn.setText("ENTRAR");
+        gradientBG5.add(btn_Entrar_LogIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 500, 210, 80));
+
+        jLabel4.setFont(new java.awt.Font("Monotype Corsiva", 0, 26)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(60, 18, 40));
+        jLabel4.setText("Contraseña:");
+        gradientBG5.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 345, 160, 40));
 
         jLabel3.setBackground(new java.awt.Color(58, 58, 58));
         jLabel3.setFont(new java.awt.Font("Monotype Corsiva", 2, 26)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(60, 18, 40));
         jLabel3.setText("Correo:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(413, 236, 110, 30));
+        gradientBG5.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(413, 236, 110, 30));
 
-        jLabel4.setFont(new java.awt.Font("Monotype Corsiva", 0, 26)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(60, 18, 40));
-        jLabel4.setText("Contraseña:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 345, 160, 40));
+        txtEmail.setBackground(new java.awt.Color(60, 56, 58));
+        txtEmail.setFont(new java.awt.Font("Monotype Corsiva", 0, 18)); // NOI18N
+        txtEmail.setForeground(new java.awt.Color(229, 229, 229));
+        txtEmail.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        gradientBG5.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 285, 230, 40));
+
         getContentPane().add(gradientBG5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1024, 768));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtEmailActionPerformed
-
-    private void btn_Entrar_LogInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Entrar_LogInActionPerformed
-        String email = txtEmail.getText();
-        String password = new String(txtPasswd_Login.getPassword());
-        password = md5.getMD5String(password);
-        emp.setCorreo(email);
-        emp.setPassword(password);
-        if(us.login(emp)){
-            System.out.println("Usuario y contraseña correcto");
-            gp.creaSeleccionProducto(emp);
-            dispose();
-        }else{
-            System.err.println("Usuario y contraseña incorrecto");
-        }
-    }//GEN-LAST:event_btn_Entrar_LogInActionPerformed
 
     /**
      * @param args the command line arguments
@@ -145,7 +125,9 @@ public class Pantalla_LogIn extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Entrar_LogIn;
+    private tpv.button button1;
     private tpv.gradientBG gradientBG5;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel lblInicio;
