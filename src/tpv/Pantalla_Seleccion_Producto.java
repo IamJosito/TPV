@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 
 public class Pantalla_Seleccion_Producto extends javax.swing.JFrame {
@@ -55,7 +56,10 @@ public class Pantalla_Seleccion_Producto extends javax.swing.JFrame {
             //----------------------------------------------------
             
             //Por cada producto vamos a crear un Label para añadirlo al panel.
-            JLabel imgProducto = new JLabel(newImage);
+            JLabel imgProducto = new JLabel(newImage, SwingConstants.RIGHT);
+            imgProducto.setVerticalAlignment(SwingConstants.TOP);
+            imgProducto.setText("HOLA");
+            imgProducto.setLayout(null);
             //Le seteamos de nombre el codigo de producto para que sea unico y no de fallos.
             imgProducto.setName(String.valueOf(productos.get(i).getCodigoProducto()));
             //Mouse listener para cuando cliquemos.
@@ -103,10 +107,9 @@ public class Pantalla_Seleccion_Producto extends javax.swing.JFrame {
 
  
     @SuppressWarnings("unchecked")
-    private void initComponents() {//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        panelProductos_SelecProd = new javax.swing.JPanel();
         panelCategorias = new javax.swing.JPanel();
         btnCategoriaS_SelecProd = new javax.swing.JButton();
         btnCategoriaH_SelecProd = new javax.swing.JButton();
@@ -114,7 +117,8 @@ public class Pantalla_Seleccion_Producto extends javax.swing.JFrame {
         btnCategoriaU_SelecProd = new javax.swing.JButton();
         btnCategoriaP_SelecProd = new javax.swing.JButton();
         btnCategoriaA_SelecProd = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        panelProductos_SelecProd = new javax.swing.JPanel();
         panelMenuSelecProd = new javax.swing.JPanel();
         btnAdmin_SelecProd = new javax.swing.JButton();
         btnSalir_SelecProd = new javax.swing.JButton();
@@ -125,8 +129,6 @@ public class Pantalla_Seleccion_Producto extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(1024, 769));
         setSize(new java.awt.Dimension(1024, 768));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        panelProductos_SelecProd.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         panelCategorias.setBorder(javax.swing.BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(0, 0, 0)));
         panelCategorias.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -179,11 +181,9 @@ public class Pantalla_Seleccion_Producto extends javax.swing.JFrame {
         });
         panelCategorias.add(btnCategoriaA_SelecProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 220, 110, 110));
 
-        panelProductos_SelecProd.add(panelCategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 690, 380));
+        getContentPane().add(panelCategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(155, 210, 690, 380));
 
-        jButton1.setText("jButton1");
-        panelProductos_SelecProd.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 160, 90, 80));
-
+        panelProductos_SelecProd.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jScrollPane1.setViewportView(panelProductos_SelecProd);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 1030, 640));
@@ -231,7 +231,7 @@ public class Pantalla_Seleccion_Producto extends javax.swing.JFrame {
         getContentPane().add(panelMenuSelecProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1030, 130));
 
         pack();
-    }//GEN-END:initComponents
+    }// </editor-fold>//GEN-END:initComponents
 
     
     private void btnCategoria_SelecProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoria_SelecProdActionPerformed
@@ -372,7 +372,6 @@ public class Pantalla_Seleccion_Producto extends javax.swing.JFrame {
     private javax.swing.JButton btnCategoriaU_SelecProd;
     private javax.swing.JButton btnCategoria_SelecProd;
     private javax.swing.JButton btnSalir_SelecProd;
-    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel panelCategorias;
     private javax.swing.JPanel panelMenuSelecProd;
