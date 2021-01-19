@@ -58,8 +58,6 @@ public class Pantalla_Seleccion_Producto extends javax.swing.JFrame {
             //Por cada producto vamos a crear un Label para añadirlo al panel.
             JLabel imgProducto = new JLabel(newImage, SwingConstants.RIGHT);
             imgProducto.setVerticalAlignment(SwingConstants.TOP);
-            imgProducto.setText("HOLA");
-            imgProducto.setLayout(null);
             //Le seteamos de nombre el codigo de producto para que sea unico y no de fallos.
             imgProducto.setName(String.valueOf(productos.get(i).getCodigoProducto()));
             
@@ -182,11 +180,8 @@ public class Pantalla_Seleccion_Producto extends javax.swing.JFrame {
         });
         panelCategorias.add(btnCategoriaA_SelecProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 220, 110, 110));
 
-<<<<<<< HEAD
-        getContentPane().add(panelCategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(155, 210, 690, 380));
-=======
         getContentPane().add(panelCategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(165, 220, 690, 380));
->>>>>>> Josito
+
 
         panelProductos_SelecProd.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jScrollPane1.setViewportView(panelProductos_SelecProd);

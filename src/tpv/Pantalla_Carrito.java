@@ -1,15 +1,12 @@
 package tpv;
 
-import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.border.Border;
 
 public class Pantalla_Carrito extends javax.swing.JFrame {
 
@@ -18,9 +15,10 @@ public class Pantalla_Carrito extends javax.swing.JFrame {
     HashMap<Integer, Integer> productosCarrito;
     ArrayList productosCarritoArray;
     
+    
     public Pantalla_Carrito() {
         initComponents();
-        this.setLocationRelativeTo(null);
+        //this.setLocationRelativeTo(null);
         gp = new gestionPantallas();
     }
     
