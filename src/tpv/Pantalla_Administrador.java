@@ -415,7 +415,14 @@ public class Pantalla_Administrador extends javax.swing.JFrame {
             
         }
         
-        
+        for (Component c : panelAddEditProd_Administrador.getComponents()) {
+            if(c instanceof JTextField){
+                JTextField label = (JTextField) c;
+                label.setText("");
+            }
+            
+        }
+        mostrarImagenProd.setIcon(null);
     }//GEN-LAST:event_btnAddProd_AdministradorActionPerformed
 
     private void btnEditProd_AdministradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditProd_AdministradorActionPerformed
