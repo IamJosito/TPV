@@ -10,6 +10,11 @@ public class gestionPantallas {
         psp.setVisible(true);
     }
     
+    protected void creaSeleccionProducto(Empleado emp, HashMap productos){
+        Pantalla_Seleccion_Producto psp = new Pantalla_Seleccion_Producto(emp, productos);
+        psp.setVisible(true);
+    }
+    
     protected void creaLogin(){
         Pantalla_LogIn pl = new Pantalla_LogIn();
         pl.setVisible(true);

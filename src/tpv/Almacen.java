@@ -199,7 +199,7 @@ public class Almacen {
         try {
             this.conexion();
             
-            String recibirTodosProductos = "SELECT * FROM almacen ORDER BY " + order;
+            String recibirTodosProductos = "SELECT * FROM almacen ORDER BY " + order + " ASC";
             ResultSet rs = sentencia.executeQuery(recibirTodosProductos);
             ArrayList<Producto> productos = new ArrayList();
             
@@ -231,7 +231,7 @@ public class Almacen {
         try {
             this.conexion();
             
-            String recibirTodosProductos = "SELECT * FROM almacen ORDER BY " + genero;
+            String recibirTodosProductos = "SELECT * FROM almacen WHERE genero = '" + genero +"'";
             ResultSet rs = sentencia.executeQuery(recibirTodosProductos);
             ArrayList<Producto> productos = new ArrayList();
             

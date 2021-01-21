@@ -18,6 +18,7 @@ public class Pantalla_Seleccion_Producto extends javax.swing.JFrame {
     Empleado empleadoLogeado = new Empleado();
     Almacen almc = new Almacen();
     HashMap<Integer, Integer> productosCarrito = new HashMap();
+    ArrayList <Producto> productos = almc.mostrarProducto();
     
     public Pantalla_Seleccion_Producto() {
         initComponents();
@@ -32,8 +33,6 @@ public class Pantalla_Seleccion_Producto extends javax.swing.JFrame {
         //Eliminamos todos los componentes de nuestro panel de productos, por si acaso tenemos alguno
         panelProductos_SelecProd.removeAll();
         
-        Almacen almacen = new Almacen();
-        ArrayList <Producto> productos = almacen.mostrarProducto();
         int posX = 10;
         int posY = 10;
         
@@ -103,6 +102,18 @@ public class Pantalla_Seleccion_Producto extends javax.swing.JFrame {
         System.out.println(empleadoLogeado.getCorreo());
         this.cargarProductos();
     }
+    
+    public Pantalla_Seleccion_Producto(Empleado emp, HashMap productosCarrito) {
+        initComponents();
+        this.setLocationRelativeTo(null);
+        panelCategorias.setVisible(false);
+        gp = new gestionPantallas();
+        this.empleadoLogeado=emp; 
+        System.out.println(empleadoLogeado.getCorreo());
+        this.productosCarrito = productosCarrito;
+        this.cargarProductos();
+        
+    }
 
  
     @SuppressWarnings("unchecked")
@@ -116,6 +127,7 @@ public class Pantalla_Seleccion_Producto extends javax.swing.JFrame {
         btnCategoriaU_SelecProd = new javax.swing.JButton();
         btnCategoriaP_SelecProd = new javax.swing.JButton();
         btnCategoriaA_SelecProd = new javax.swing.JButton();
+        btnCategoriaTodo_SelecProd = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         panelProductos_SelecProd = new javax.swing.JPanel();
         panelMenuSelecProd = new javax.swing.JPanel();
@@ -138,7 +150,7 @@ public class Pantalla_Seleccion_Producto extends javax.swing.JFrame {
                 btnCategoriaS_SelecProdActionPerformed(evt);
             }
         });
-        panelCategorias.add(btnCategoriaS_SelecProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 220, 110, 110));
+        panelCategorias.add(btnCategoriaS_SelecProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 220, 110, 110));
 
         btnCategoriaH_SelecProd.setText("HOMBRE");
         btnCategoriaH_SelecProd.addActionListener(new java.awt.event.ActionListener() {
@@ -154,7 +166,7 @@ public class Pantalla_Seleccion_Producto extends javax.swing.JFrame {
                 btnCategoriaM_SelecProdActionPerformed(evt);
             }
         });
-        panelCategorias.add(btnCategoriaM_SelecProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 110, 110));
+        panelCategorias.add(btnCategoriaM_SelecProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 50, 110, 110));
 
         btnCategoriaU_SelecProd.setText("UNISEX");
         btnCategoriaU_SelecProd.addActionListener(new java.awt.event.ActionListener() {
@@ -162,7 +174,7 @@ public class Pantalla_Seleccion_Producto extends javax.swing.JFrame {
                 btnCategoriaU_SelecProdActionPerformed(evt);
             }
         });
-        panelCategorias.add(btnCategoriaU_SelecProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 50, 110, 110));
+        panelCategorias.add(btnCategoriaU_SelecProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 50, 110, 110));
 
         btnCategoriaP_SelecProd.setText("PRECIO");
         btnCategoriaP_SelecProd.addActionListener(new java.awt.event.ActionListener() {
@@ -172,13 +184,21 @@ public class Pantalla_Seleccion_Producto extends javax.swing.JFrame {
         });
         panelCategorias.add(btnCategoriaP_SelecProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 220, 110, 110));
 
-        btnCategoriaA_SelecProd.setText("ALFABETICAMENTE");
+        btnCategoriaA_SelecProd.setText("ALFABETICO");
         btnCategoriaA_SelecProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCategoriaA_SelecProdActionPerformed(evt);
             }
         });
-        panelCategorias.add(btnCategoriaA_SelecProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 220, 110, 110));
+        panelCategorias.add(btnCategoriaA_SelecProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 220, 110, 110));
+
+        btnCategoriaTodo_SelecProd.setText("VER TODO");
+        btnCategoriaTodo_SelecProd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCategoriaTodo_SelecProdActionPerformed(evt);
+            }
+        });
+        panelCategorias.add(btnCategoriaTodo_SelecProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 140, 110, 110));
 
         getContentPane().add(panelCategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(165, 220, 690, 380));
 
@@ -247,37 +267,43 @@ public class Pantalla_Seleccion_Producto extends javax.swing.JFrame {
 
     private void btnCategoriaS_SelecProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriaS_SelecProdActionPerformed
         // TODO add your handling code here:
-        //almc.mostrarProducto("stock");
+        productos = almc.mostrarProducto("stock");
+        this.cargarProductos();
         panelCategorias.setVisible(false);
     }//GEN-LAST:event_btnCategoriaS_SelecProdActionPerformed
 
     private void btnCategoriaM_SelecProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriaM_SelecProdActionPerformed
         // TODO add your handling code here:
-        almc.mostrarProductoGenero("m");
+        productos = almc.mostrarProductoGenero("m");
+        this.cargarProductos();
         panelCategorias.setVisible(false);
     }//GEN-LAST:event_btnCategoriaM_SelecProdActionPerformed
 
     private void btnCategoriaU_SelecProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriaU_SelecProdActionPerformed
         // TODO add your handling code here:
-        //almc.mostrarProductoGenero("u");
+        productos = almc.mostrarProductoGenero("u");
+        this.cargarProductos();
         panelCategorias.setVisible(false);
     }//GEN-LAST:event_btnCategoriaU_SelecProdActionPerformed
 
     private void btnCategoriaP_SelecProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriaP_SelecProdActionPerformed
         // TODO add your handling code here:
-        almc.mostrarProducto("precio");
+        productos = almc.mostrarProducto("precio");
+        this.cargarProductos();
         panelCategorias.setVisible(false);
     }//GEN-LAST:event_btnCategoriaP_SelecProdActionPerformed
 
     private void btnCategoriaA_SelecProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriaA_SelecProdActionPerformed
         // TODO add your handling code here:
-        almc.mostrarProducto("nombre");
+        productos = almc.mostrarProducto("nombre");
+        this.cargarProductos();
         panelCategorias.setVisible(false);
     }//GEN-LAST:event_btnCategoriaA_SelecProdActionPerformed
 
     private void btnCategoriaH_SelecProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriaH_SelecProdActionPerformed
         // TODO add your handling code here:
-        //almc.mostrarProductoGenero("h");
+        productos = almc.mostrarProductoGenero("h");
+        this.cargarProductos();
         panelCategorias.setVisible(false);
     }//GEN-LAST:event_btnCategoriaH_SelecProdActionPerformed
 
@@ -296,6 +322,12 @@ public class Pantalla_Seleccion_Producto extends javax.swing.JFrame {
             System.out.println("Debes de ser admin");
         }
     }//GEN-LAST:event_btnAdmin_SelecProdActionPerformed
+
+    private void btnCategoriaTodo_SelecProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriaTodo_SelecProdActionPerformed
+        productos = almc.mostrarProducto();
+        this.cargarProductos();
+        panelCategorias.setVisible(false);
+    }//GEN-LAST:event_btnCategoriaTodo_SelecProdActionPerformed
 
 
     public static void main(String args[]) {
@@ -369,6 +401,7 @@ public class Pantalla_Seleccion_Producto extends javax.swing.JFrame {
     private javax.swing.JButton btnCategoriaM_SelecProd;
     private javax.swing.JButton btnCategoriaP_SelecProd;
     private javax.swing.JButton btnCategoriaS_SelecProd;
+    private javax.swing.JButton btnCategoriaTodo_SelecProd;
     private javax.swing.JButton btnCategoriaU_SelecProd;
     private javax.swing.JButton btnCategoria_SelecProd;
     private javax.swing.JButton btnSalir_SelecProd;
