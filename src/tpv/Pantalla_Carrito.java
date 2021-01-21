@@ -9,6 +9,7 @@ import java.util.HashMap;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 
 public class Pantalla_Carrito extends javax.swing.JFrame {
@@ -17,7 +18,7 @@ public class Pantalla_Carrito extends javax.swing.JFrame {
     Empleado empleadoLogeado;
     HashMap<Integer, Integer> productosCarrito;
     ArrayList productosCarritoArray;
-    
+    Ventas venta = new Ventas();
     public Pantalla_Carrito() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -34,6 +35,8 @@ public class Pantalla_Carrito extends javax.swing.JFrame {
     }
 
     public void cargaProducto(){
+        
+        panelProductos_Carrito.removeAll();
         Almacen almacen = new Almacen();
         ArrayList <Producto> productos = almacen.mostrarProducto(productosCarrito);
         int posX = 10;
@@ -72,7 +75,17 @@ public class Pantalla_Carrito extends javax.swing.JFrame {
             imgProducto.addMouseListener(new MouseAdapter() {
                 boolean estaSeleccionado = false;
                 public void mouseClicked(MouseEvent e){
-                    //si no ha sido clickado le ponemos un borde y lo añadimos al array de eliminar producto
+                    if(e.getClickCount() == 2){
+                        int cantidad = productosCarrito.get(Integer.parseInt(imgProducto.getName()));
+                        int key = Integer.parseInt(imgProducto.getName());
+                        productosCarrito.put(key, cantidad-1);
+                        if(productosCarrito.get(key) == 0) productosCarrito.remove(key);
+                        
+                        cargaProducto();
+                        System.out.println("Hashmap "+ productosCarrito );
+                        System.out.println("Llave: " + key + " Cantidad: "+ cantidad);
+                        
+                    }
                     
                 }
             });
@@ -128,6 +141,11 @@ public class Pantalla_Carrito extends javax.swing.JFrame {
 
         btnPagarEfectivo_Carrito.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnPagarEfectivo_Carrito.setText("EFECTIVO");
+        btnPagarEfectivo_Carrito.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPagarEfectivo_CarritoActionPerformed(evt);
+            }
+        });
         panelMenuSelecProd.add(btnPagarEfectivo_Carrito, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 10, 120, 110));
 
         btnVolver_Carrito.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -175,14 +193,32 @@ public class Pantalla_Carrito extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPagarTarjeta_CarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagarTarjeta_CarritoActionPerformed
-        // TODO add your handling code here:
+        if(!productosCarrito.isEmpty()){
+            venta.agregarVenta(productosCarrito);
+            productosCarrito.clear();
+            gp.creaSeleccionProducto(empleadoLogeado, productosCarrito);
+            dispose();
+        }else{
+            JOptionPane.showMessageDialog(null,"Tu carrito está vacío." ,"ERROR", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnPagarTarjeta_CarritoActionPerformed
 
     private void btnVolver_CarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolver_CarritoActionPerformed
         // TODO add your handling code here:
-        gp.creaSeleccionProducto(empleadoLogeado);
+        gp.creaSeleccionProducto(empleadoLogeado, productosCarrito);
         dispose();
     }//GEN-LAST:event_btnVolver_CarritoActionPerformed
+
+    private void btnPagarEfectivo_CarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagarEfectivo_CarritoActionPerformed
+        if(!productosCarrito.isEmpty()){
+            venta.agregarVenta(productosCarrito);
+            productosCarrito.clear();
+            gp.creaSeleccionProducto(empleadoLogeado, productosCarrito);
+            dispose();
+        }else{
+            JOptionPane.showMessageDialog(null,"Tu carrito está vacío." ,"ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnPagarEfectivo_CarritoActionPerformed
 
 
     public static void main(String args[]) {
