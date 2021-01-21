@@ -40,15 +40,20 @@ public class mainPrueba {
         Producto pr = new Producto();
         Almacen al = new Almacen();
         
-        pr.setCodigoProducto(21123);
-        pr.setDescripcion("Producto 3 descripcion");
-        pr.setGenero("H");
-        pr.setNombre("prodPruebaCambio");
-        pr.setPrecio(12.34);
-        pr.setStock(15);
-        pr.setImagenFile("C:\\Users\\thebe\\OneDrive\\Escritorio\\img.jpg");
+       
+        
+        pr.setNombre("Diva");
+        pr.setDescripcion("Masajeador de clitoris");
+        pr.setGenero("M");
+        pr.setPrecio(35.99);
+        pr.setStock(150);
+        pr.setImagenFile("C:\\Users\\thebe\\OneDrive\\Escritorio\\TPV_IMGS\\imgM7.png");
+        pr.setCodigoProducto(7);
         
         al.insertarProducto(pr);
+        
+        
+        
 
         //al.eliminarProducto(2134);
         

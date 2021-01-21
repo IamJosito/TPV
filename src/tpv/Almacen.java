@@ -150,9 +150,10 @@ public class Almacen {
     public void eliminarProducto(int codProducto){
         try{
             this.conexion();
-            
+            sentencia.executeUpdate("SET FOREIGN_KEY_CHECKS = 0");
             String eliminarProd = "DELETE FROM almacen WHERE codigoProducto = " + codProducto;
             sentencia.executeUpdate(eliminarProd);
+            sentencia.executeUpdate("SET FOREIGN_KEY_CHECKS = 1");
             this.desconexion();
             
         } catch (SQLException ex) {

@@ -74,7 +74,7 @@ public class Pantalla_Administrador extends javax.swing.JFrame {
             
             //Para dar un salto a la siguiente linea al mostrar nuestros productos.
             if(posX >= 870){
-                posY += 170;
+                posY += 230;
                 posX = 10;
             }
             
@@ -117,7 +117,7 @@ public class Pantalla_Administrador extends javax.swing.JFrame {
             
             //agregamos la label a nuestro panel.
             panelProductos_Administrador.add(imgProducto,new org.netbeans.lib.awtextra.AbsoluteConstraints(posX, posY, 150, 150));
-            panelProductos_Administrador.add(datosProducto,new org.netbeans.lib.awtextra.AbsoluteConstraints(posX, posY+150, 150, 30));
+            panelProductos_Administrador.add(datosProducto,new org.netbeans.lib.awtextra.AbsoluteConstraints(posX, posY+150, 150, 70));
             posX += 170;
             //870 limite en X
             

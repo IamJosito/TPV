@@ -46,7 +46,7 @@ public class Pantalla_Carrito extends javax.swing.JFrame {
             
             //Para dar un salto a la siguiente linea al mostrar nuestros productos.
             if(posX >= 870){
-                posY += 220;
+                posY += 250;
                 posX = 10;
             }
             
@@ -67,7 +67,7 @@ public class Pantalla_Carrito extends javax.swing.JFrame {
             JLabel datosProducto = new JLabel("<HTML><b>Nombre:</b> "+ String.valueOf(productos.get(i).getNombre()) 
                     +" <br> <b>Codigo:</b> "+String.valueOf(productos.get(i).getCodigoProducto()) +" <br> <b>Precio:</b> "
                     +String.valueOf(productos.get(i).getPrecio())+" <br>"
-                    + " Cantidad: "+String.valueOf(productosCarrito.get(productos.get(i).getCodigoProducto()))+" </HTML>");
+                    + " <b>Cantidad:</b> "+String.valueOf(productosCarrito.get(productos.get(i).getCodigoProducto()))+" </HTML>");
             
             //Mouse listener para cuando cliquemos.
             imgProducto.addMouseListener(new MouseAdapter() {
@@ -90,7 +90,7 @@ public class Pantalla_Carrito extends javax.swing.JFrame {
             
             //agregamos la label a nuestro panel.
             panelProductos_Carrito.add(imgProducto,new org.netbeans.lib.awtextra.AbsoluteConstraints(posX, posY, 150, 150));
-            panelProductos_Carrito.add(datosProducto,new org.netbeans.lib.awtextra.AbsoluteConstraints(posX, posY+160, 150, 80));
+            panelProductos_Carrito.add(datosProducto,new org.netbeans.lib.awtextra.AbsoluteConstraints(posX, posY+150, 150, 90));
             posX += 170;
             //870 limite en X
             
