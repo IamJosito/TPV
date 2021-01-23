@@ -2,10 +2,12 @@ package tpv;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
@@ -13,6 +15,7 @@ import javax.swing.border.EmptyBorder;
 public class Pantalla_AdministrarUsuarios extends javax.swing.JFrame {
 
     private gestionPantallas gp;
+    private button btn;
     
     ArrayList empleadosParaEliminar = new ArrayList();
     boolean buscadorVisible = false;
@@ -20,21 +23,89 @@ public class Pantalla_AdministrarUsuarios extends javax.swing.JFrame {
     ArrayList <Empleado> empleados = usuario.leerEmpleados();
     Empleado empleadoLogeado;
     
+    private JButton addEmpleado;
+    private JButton remvEmpleado;
+    private JButton addAdmin;
+    private JButton remvAdmin;
+    private JButton buscarEmp;
+    private JButton volver;
+    
     public Pantalla_AdministrarUsuarios() {
         initComponents();
         this.setLocationRelativeTo(null);
         gp = new gestionPantallas();
+        btn = new button();
         txtBuscador.setVisible(buscadorVisible);
         this.cargarEmpleados();
+        this.pintaBotones();
     }
     
     public Pantalla_AdministrarUsuarios(Empleado emp) {
         initComponents();
         this.setLocationRelativeTo(null);
         gp = new gestionPantallas();
+        btn = new button();
         txtBuscador.setVisible(buscadorVisible);
         this.cargarEmpleados();
         this.empleadoLogeado = emp;
+        this.pintaBotones();
+    }
+    
+    private void pintaBotones(){
+        
+        addEmpleado = btn.creaButton("src/assets/add-empleado.png","<html><body>AÑADIR <br>EMPLEADO</body></html>",19);
+        
+        panelMenuSelecProd.add(addEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 120, 110));
+        addEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addEmpleado(evt);
+            }
+        });
+        
+        remvEmpleado = btn.creaButton("src/assets/remove-empleado.png","<html><body>ELIMINAR <br>EMPLEADO</body></html>",19);
+        
+        panelMenuSelecProd.add(remvEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, 120, 110));
+        remvEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeEmpleado(evt);
+            }
+        });
+        
+        addAdmin = btn.creaButton("src/assets/add-admin.png","<html><body>AÑADIR <br>ADMIN</body></html>",19);
+        
+        panelMenuSelecProd.add(addAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 10, 120, 110));
+        addAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addAdmin(evt);
+            }
+        });
+        
+        remvAdmin = btn.creaButton("src/assets/remove-admin.png","<html><body>QUITAR <br>ADMIN</body></html>",19);
+        
+        panelMenuSelecProd.add(remvAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 10, 120, 110));
+        remvAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeAdmin(evt);
+            }
+        });
+        
+        buscarEmp = btn.creaButton("src/assets/buscar.png","<html><body>BUSCAR <br>EMPLEADO</body></html>",19);
+        
+        panelMenuSelecProd.add(buscarEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 10, 120, 110));
+        buscarEmp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarEmpleado(evt);
+            }
+        });
+        
+        volver = btn.creaButton("src/assets/volver.png","VOLVER",19);
+        
+        panelMenuSelecProd.add(volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 10, 120, 110));
+        volver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                volver(evt);
+            }
+        });
     }
 
     /**
@@ -52,7 +123,7 @@ public class Pantalla_AdministrarUsuarios extends javax.swing.JFrame {
         
         int posX = 10;
         int posY = 10;
-        
+        Color colorBorde = new Color(253,126,14);
         
         for (int i = 0; i < empleados.size(); i++) {
             
@@ -66,6 +137,8 @@ public class Pantalla_AdministrarUsuarios extends javax.swing.JFrame {
             String esAdmin = emp.getEsAdmin() ? "Si" : "No";
             //Por cada producto vamos a crear un Label para añadirlo al panel.
             JLabel datosEmpleado = new JLabel("<HTML><b>Nombre:</b> "+emp.getNombre() +" "+ emp.getApellidos()+" <br> <b>Administrado:</b> "+ esAdmin +"</HTML>");
+            datosEmpleado.setForeground(Color.white);
+            datosEmpleado.setFont(new Font("Calibri", Font.ITALIC, 15));
             //Le seteamos de nombre el codigo de producto para que sea unico y no de fallos.
             datosEmpleado.setName(String.valueOf(empleados.get(i).getCorreo()));
             datosEmpleado.setBorder(new EmptyBorder(0,5,0,0));
@@ -75,7 +148,7 @@ public class Pantalla_AdministrarUsuarios extends javax.swing.JFrame {
                 public void mouseClicked(MouseEvent e){
                     //si no ha sido clickado le ponemos un borde y lo añadimos al array de eliminar producto
                     if(!estaSeleccionado){
-                        Border border = BorderFactory.createLineBorder(Color.BLUE, 5);
+                        Border border = BorderFactory.createLineBorder(colorBorde, 5);
                         datosEmpleado.setBorder(border);
                         empleadosParaEliminar.add(datosEmpleado.getName());
                         estaSeleccionado = true;
@@ -95,6 +168,7 @@ public class Pantalla_AdministrarUsuarios extends javax.swing.JFrame {
             posX += 170;
             //870 limite en X
             
+            
         }
         //revalidamos y repintamos el panel.
         panelProductos_Administrador.revalidate();
@@ -108,20 +182,18 @@ public class Pantalla_AdministrarUsuarios extends javax.swing.JFrame {
 
         txtBuscador = new javax.swing.JTextField();
         panelMenuSelecProd = new javax.swing.JPanel();
-        btnAnadirAdmin_Administrar = new javax.swing.JButton();
-        btnBuscarEmp_Administrar = new javax.swing.JButton();
-        btnAnadirEmp_Administrar = new javax.swing.JButton();
-        btnQuitarEmp_Administrar = new javax.swing.JButton();
-        btnQuitarAdmin_Administrar = new javax.swing.JButton();
-        btnVolver_Administrar1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         panelProductos_Administrador = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1024, 769));
+        setUndecorated(true);
         setSize(new java.awt.Dimension(1024, 768));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        txtBuscador.setBackground(new java.awt.Color(255, 179, 71));
+        txtBuscador.setFont(new java.awt.Font("Monotype Corsiva", 0, 17)); // NOI18N
+        txtBuscador.setForeground(new java.awt.Color(51, 51, 51));
         txtBuscador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtBuscadorActionPerformed(evt);
@@ -140,66 +212,13 @@ public class Pantalla_AdministrarUsuarios extends javax.swing.JFrame {
         });
         getContentPane().add(txtBuscador, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 80, 120, 40));
 
-        panelMenuSelecProd.setBackground(new java.awt.Color(102, 102, 102));
-        panelMenuSelecProd.setBorder(javax.swing.BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(102, 102, 102)));
+        panelMenuSelecProd.setBackground(new java.awt.Color(30, 30, 30));
         panelMenuSelecProd.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btnAnadirAdmin_Administrar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        btnAnadirAdmin_Administrar.setText("<html><body>AÑADIR<br>ADMINISTRADOR</body></html>");
-        btnAnadirAdmin_Administrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAnadirAdmin_AdministrarActionPerformed(evt);
-            }
-        });
-        panelMenuSelecProd.add(btnAnadirAdmin_Administrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 10, 120, 110));
-
-        btnBuscarEmp_Administrar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        btnBuscarEmp_Administrar.setText("<html><body>BUSCAR<br>EMPLEADO</body></html>");
-        btnBuscarEmp_Administrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarEmp_AdministrarActionPerformed(evt);
-            }
-        });
-        panelMenuSelecProd.add(btnBuscarEmp_Administrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 10, 120, 110));
-
-        btnAnadirEmp_Administrar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        btnAnadirEmp_Administrar.setText("<html><body>AÑADIR <br>EMPLEADO</body></html>");
-        btnAnadirEmp_Administrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAnadirEmp_AdministrarActionPerformed(evt);
-            }
-        });
-        panelMenuSelecProd.add(btnAnadirEmp_Administrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 120, 110));
-
-        btnQuitarEmp_Administrar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        btnQuitarEmp_Administrar.setText("<html><body>ELIMINAR<br>EMPLEADO</body></html>");
-        btnQuitarEmp_Administrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnQuitarEmp_AdministrarActionPerformed(evt);
-            }
-        });
-        panelMenuSelecProd.add(btnQuitarEmp_Administrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, 120, 110));
-
-        btnQuitarAdmin_Administrar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        btnQuitarAdmin_Administrar.setText("<html><body>QUITAR<br>ADMINISTRADOR</body></html>");
-        btnQuitarAdmin_Administrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnQuitarAdmin_AdministrarActionPerformed(evt);
-            }
-        });
-        panelMenuSelecProd.add(btnQuitarAdmin_Administrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 10, 120, 110));
-
-        btnVolver_Administrar1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        btnVolver_Administrar1.setText("VOLVER");
-        btnVolver_Administrar1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVolver_Administrar1ActionPerformed(evt);
-            }
-        });
-        panelMenuSelecProd.add(btnVolver_Administrar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 10, 120, 110));
-
         getContentPane().add(panelMenuSelecProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1030, 130));
 
+        jScrollPane1.setBorder(null);
+
+        panelProductos_Administrador.setBackground(new java.awt.Color(30, 30, 30));
         panelProductos_Administrador.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jScrollPane1.setViewportView(panelProductos_Administrador);
 
@@ -207,58 +226,53 @@ public class Pantalla_AdministrarUsuarios extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnQuitarEmp_AdministrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarEmp_AdministrarActionPerformed
+    
+    private void addEmpleado(java.awt.event.ActionEvent evt){
+        gp.creaRegistro(empleadoLogeado);
+        dispose();
+    }
+    private void removeEmpleado(java.awt.event.ActionEvent evt){
         Usuario us = new Usuario();
         for (int i = 0; i < empleadosParaEliminar.size(); i++) {
             us.borrarEmpleado((String) empleadosParaEliminar.get(i));
         }
-        
+        empleados = us.leerEmpleados();
         this.cargarEmpleados();
-    }//GEN-LAST:event_btnQuitarEmp_AdministrarActionPerformed
-
-    private void btnAnadirEmp_AdministrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnadirEmp_AdministrarActionPerformed
-        // TODO add your handling code here:
-
-        gp.creaRegistro(empleadoLogeado);
-        dispose();
-    }//GEN-LAST:event_btnAnadirEmp_AdministrarActionPerformed
-
-    private void btnQuitarAdmin_AdministrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarAdmin_AdministrarActionPerformed
-        Usuario us = new Usuario();
-        for (int i = 0; i < empleadosParaEliminar.size(); i++) {
-            us.eliminarAdmin((String) empleadosParaEliminar.get(i));
-        }
-        empleados = usuario.leerEmpleados();
-        this.cargarEmpleados();
-    }//GEN-LAST:event_btnQuitarAdmin_AdministrarActionPerformed
-
-    private void btnVolver_Administrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolver_Administrar1ActionPerformed
-        // TODO add your handling code here:
-
-        gp.creaAdministrador(empleadoLogeado);
-        dispose();
-    }//GEN-LAST:event_btnVolver_Administrar1ActionPerformed
-
-    private void btnAnadirAdmin_AdministrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnadirAdmin_AdministrarActionPerformed
+    }
+    private void addAdmin(java.awt.event.ActionEvent evt){
         Usuario us = new Usuario();
         for (int i = 0; i < empleadosParaEliminar.size(); i++) {
             us.anadirAdmin((String) empleadosParaEliminar.get(i));
         }
         empleados = usuario.leerEmpleados();
+        empleados = us.leerEmpleados();
         this.cargarEmpleados();
-    }//GEN-LAST:event_btnAnadirAdmin_AdministrarActionPerformed
-
+    }
+    
+    private void removeAdmin(java.awt.event.ActionEvent evt){
+        Usuario us = new Usuario();
+        for (int i = 0; i < empleadosParaEliminar.size(); i++) {
+            us.eliminarAdmin((String) empleadosParaEliminar.get(i));
+        }
+        empleados = usuario.leerEmpleados();
+        empleados = us.leerEmpleados();
+        this.cargarEmpleados();
+    }
+    
+    private void buscarEmpleado(java.awt.event.ActionEvent evt){
+        buscadorVisible = !buscadorVisible;
+        if(buscadorVisible) buscarEmp.setSize(new Dimension(120,70));
+        else buscarEmp.setSize(new Dimension(120,110));
+        txtBuscador.setVisible(buscadorVisible);
+    }
+    private void volver(java.awt.event.ActionEvent evt){
+        gp.creaAdministrador(empleadoLogeado);
+        dispose();
+    }
+    
     private void txtBuscadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscadorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBuscadorActionPerformed
-
-    private void btnBuscarEmp_AdministrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarEmp_AdministrarActionPerformed
-        buscadorVisible = !buscadorVisible;
-        if(buscadorVisible) btnBuscarEmp_Administrar.setSize(new Dimension(120,70));
-        else btnBuscarEmp_Administrar.setSize(new Dimension(120,110));
-        txtBuscador.setVisible(buscadorVisible);
-    }//GEN-LAST:event_btnBuscarEmp_AdministrarActionPerformed
 
     private void txtBuscadorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscadorKeyTyped
         
@@ -320,12 +334,6 @@ public class Pantalla_AdministrarUsuarios extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAnadirAdmin_Administrar;
-    private javax.swing.JButton btnAnadirEmp_Administrar;
-    private javax.swing.JButton btnBuscarEmp_Administrar;
-    private javax.swing.JButton btnQuitarAdmin_Administrar;
-    private javax.swing.JButton btnQuitarEmp_Administrar;
-    private javax.swing.JButton btnVolver_Administrar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel panelMenuSelecProd;
     private javax.swing.JPanel panelProductos_Administrador;

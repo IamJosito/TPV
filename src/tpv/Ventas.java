@@ -64,7 +64,7 @@ public class Ventas {
     /**
      * @see Agregar una venta a la DB
      */
-    public void agregarVenta(Map <Integer,Integer> productos){
+    public void agregarVenta(Map <Integer,Integer> productos, String correoUsuario){
         try{
             int codigoVenta = this.generateCode();
             this.conexion();
@@ -74,10 +74,11 @@ public class Ventas {
                 
                 sentencia.executeUpdate("SET FOREIGN_KEY_CHECKS=0");
                 
-                String sqlVenta = String.format("INSERT INTO ventas (codigoVenta, productos, ventasProductos, fechaVenta) VALUES (%1$d,%2$d,%3$d,'"+dateFormat.format(date)+"')",
+                String sqlVenta = String.format("INSERT INTO ventas (codigoVenta, productos, ventasProductos, fechaVenta, correoEmpleado) VALUES (%1$d,%2$d,%3$d,'"+dateFormat.format(date)+"', '%4$s')",
                         codigoVenta,
                         codProd,
-                        productos.get(codProd));
+                        productos.get(codProd),
+                        correoUsuario);
                 sentencia.executeUpdate(sqlVenta);
                 
                 String sqlEditarStockAlmacen =  String.format("UPDATE almacen SET stock = stock - %1$d WHERE codigoProducto = %2$d",

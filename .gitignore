@@ -1,6 +1,22 @@
-<<<<<<< HEAD
-/build/
-=======
->>>>>>> Josito
-/nbproject/private/
-/dist/
+##############################
+## NetBeans
+##############################
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+nb-configuration.xml
+##############################
+## Java
+##############################
+.mtj.tmp/
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+hs_err_pid*
+readMe.txt
+.gitignore

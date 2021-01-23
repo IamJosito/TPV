@@ -1,11 +1,14 @@
 package tpv;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -13,23 +16,66 @@ import javax.swing.JOptionPane;
 public class Pantalla_Carrito extends javax.swing.JFrame {
 
     private gestionPantallas gp;
+    private button btn;
+    
     Empleado empleadoLogeado;
     HashMap<Integer, Integer> productosCarrito;
     ArrayList productosCarritoArray;
     Ventas venta = new Ventas();
+    
+    private JButton volver;
+    private JButton tarjeta;
+    private JButton efectivo;
+    
+    
     public Pantalla_Carrito() {
         initComponents();
-        //this.setLocationRelativeTo(null);
+        this.setLocationRelativeTo(null);
         gp = new gestionPantallas();
+        btn = new button();
+        this.pintaBotones();
     }
     
     public Pantalla_Carrito(Empleado emp, HashMap productosCarrito) {
         initComponents();
         this.setLocationRelativeTo(null);
         gp = new gestionPantallas();
+        btn = new button();
         this.empleadoLogeado = emp;
         this.productosCarrito = productosCarrito;
         this.cargaProducto();
+        this.pintaBotones();
+    }
+    
+    private void pintaBotones(){
+        
+        volver = btn.creaButton("src/assets/volver.png","ATRAS",19);
+        
+        panelMenuSelecProd.add(volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 120, 110));
+        volver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                volver(evt);
+            }
+        });
+        
+        tarjeta = btn.creaButton("src/assets/tarjeta-de-credito.png","TARJETA",19);
+        
+        panelMenuSelecProd.add(tarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 10, 120, 110));
+        tarjeta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pagarTarjeta(evt);
+            }
+        });
+        
+        efectivo = btn.creaButton("src/assets/efectivo.png","EFECTIVO",19);
+        
+        panelMenuSelecProd.add(efectivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 10, 120, 110));
+        efectivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pagarEfectivo(evt);
+            }
+        });
+        
     }
 
     public void cargaProducto(){
@@ -68,6 +114,9 @@ public class Pantalla_Carrito extends javax.swing.JFrame {
                     +" <br> <b>Codigo:</b> "+String.valueOf(productos.get(i).getCodigoProducto()) +" <br> <b>Precio:</b> "
                     +String.valueOf(productos.get(i).getPrecio())+" <br>"
                     + " <b>Cantidad:</b> "+String.valueOf(productosCarrito.get(productos.get(i).getCodigoProducto()))+" </HTML>");
+            datosProducto.setForeground(Color.white);
+            datosProducto.setFont(new Font("Calibri", Font.ITALIC, 15));
+
             
             //Mouse listener para cuando cliquemos.
             imgProducto.addMouseListener(new MouseAdapter() {
@@ -113,9 +162,6 @@ public class Pantalla_Carrito extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         panelProductos_Carrito = new javax.swing.JPanel();
         panelMenuSelecProd = new javax.swing.JPanel();
-        btnPagarEfectivo_Carrito = new javax.swing.JButton();
-        btnVolver_Carrito = new javax.swing.JButton();
-        btnPagarTarjeta_Carrito = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -124,64 +170,43 @@ public class Pantalla_Carrito extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1024, 768));
-        setPreferredSize(new java.awt.Dimension(1030, 600));
+        setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(1024, 768));
         setSize(new java.awt.Dimension(1024, 768));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jScrollPane1.setBorder(null);
+
+        panelProductos_Carrito.setBackground(new java.awt.Color(30, 30, 30));
         panelProductos_Carrito.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jScrollPane1.setViewportView(panelProductos_Carrito);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 1040, 540));
 
-        panelMenuSelecProd.setBackground(new java.awt.Color(102, 102, 102));
-        panelMenuSelecProd.setBorder(javax.swing.BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(102, 102, 102)));
+        panelMenuSelecProd.setBackground(new java.awt.Color(30, 30, 30));
         panelMenuSelecProd.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btnPagarEfectivo_Carrito.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        btnPagarEfectivo_Carrito.setText("EFECTIVO");
-        btnPagarEfectivo_Carrito.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPagarEfectivo_CarritoActionPerformed(evt);
-            }
-        });
-        panelMenuSelecProd.add(btnPagarEfectivo_Carrito, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 10, 120, 110));
-
-        btnVolver_Carrito.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        btnVolver_Carrito.setText("ATRAS");
-        btnVolver_Carrito.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVolver_CarritoActionPerformed(evt);
-            }
-        });
-        panelMenuSelecProd.add(btnVolver_Carrito, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 120, 110));
-
-        btnPagarTarjeta_Carrito.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        btnPagarTarjeta_Carrito.setText("TARJETA");
-        btnPagarTarjeta_Carrito.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPagarTarjeta_CarritoActionPerformed(evt);
-            }
-        });
-        panelMenuSelecProd.add(btnPagarTarjeta_Carrito, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 10, 120, 110));
-
         getContentPane().add(panelMenuSelecProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1030, 130));
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(0, 0, 0)));
+        jPanel1.setBackground(new java.awt.Color(30, 30, 30));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Monotype Corsiva", 2, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("PRECIO:");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 16, 80, 70));
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Monotype Corsiva", 2, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("<html><body>TOTAL DE <br>ARTICULOS:</body></html>");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 20, 90, 70));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 20, 110, 70));
 
-        lblPrecio_Carrito.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        lblPrecio_Carrito.setFont(new java.awt.Font("Monotype Corsiva", 2, 24)); // NOI18N
+        lblPrecio_Carrito.setForeground(new java.awt.Color(255, 255, 255));
         lblPrecio_Carrito.setText("99999 €");
-        jPanel1.add(lblPrecio_Carrito, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, 80, 70));
+        jPanel1.add(lblPrecio_Carrito, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, 570, 70));
 
-        lblCantidadArticulos.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        lblCantidadArticulos.setFont(new java.awt.Font("Monotype Corsiva", 2, 24)); // NOI18N
+        lblCantidadArticulos.setForeground(new java.awt.Color(255, 255, 255));
         lblCantidadArticulos.setText("99999");
         jPanel1.add(lblCantidadArticulos, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 20, 100, 70));
 
@@ -190,34 +215,33 @@ public class Pantalla_Carrito extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnPagarTarjeta_CarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagarTarjeta_CarritoActionPerformed
-        if(!productosCarrito.isEmpty()){
-            venta.agregarVenta(productosCarrito);
-            productosCarrito.clear();
-            gp.creaSeleccionProducto(empleadoLogeado, productosCarrito);
-            dispose();
-        }else{
-            JOptionPane.showMessageDialog(null,"Tu carrito está vacío." ,"ERROR", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_btnPagarTarjeta_CarritoActionPerformed
-
-    private void btnVolver_CarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolver_CarritoActionPerformed
-        // TODO add your handling code here:
+    
+    private void volver(java.awt.event.ActionEvent evt){
         gp.creaSeleccionProducto(empleadoLogeado, productosCarrito);
-        dispose();
-    }//GEN-LAST:event_btnVolver_CarritoActionPerformed
-
-    private void btnPagarEfectivo_CarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagarEfectivo_CarritoActionPerformed
+        dispose();;
+    }
+    
+    private void pagarTarjeta(java.awt.event.ActionEvent evt){
         if(!productosCarrito.isEmpty()){
-            venta.agregarVenta(productosCarrito);
+            venta.agregarVenta(productosCarrito, empleadoLogeado.getCorreo());
             productosCarrito.clear();
             gp.creaSeleccionProducto(empleadoLogeado, productosCarrito);
             dispose();
         }else{
             JOptionPane.showMessageDialog(null,"Tu carrito está vacío." ,"ERROR", JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_btnPagarEfectivo_CarritoActionPerformed
-
+    }
+    private void pagarEfectivo(java.awt.event.ActionEvent evt){
+        if(!productosCarrito.isEmpty()){
+            venta.agregarVenta(productosCarrito, empleadoLogeado.getCorreo());
+            productosCarrito.clear();
+            gp.creaSeleccionProducto(empleadoLogeado, productosCarrito);
+            dispose();
+        }else{
+            JOptionPane.showMessageDialog(null,"Tu carrito está vacío." ,"ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -255,9 +279,6 @@ public class Pantalla_Carrito extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnPagarEfectivo_Carrito;
-    private javax.swing.JButton btnPagarTarjeta_Carrito;
-    private javax.swing.JButton btnVolver_Carrito;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
