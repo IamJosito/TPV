@@ -96,7 +96,6 @@ public class Pantalla_AdministrarUsuarios extends javax.swing.JFrame {
             //870 limite en X
             
         }
-        System.out.println(panelProductos_Administrador.getComponentCount());
         //revalidamos y repintamos el panel.
         panelProductos_Administrador.revalidate();
         panelProductos_Administrador.repaint();
@@ -230,7 +229,7 @@ public class Pantalla_AdministrarUsuarios extends javax.swing.JFrame {
         for (int i = 0; i < empleadosParaEliminar.size(); i++) {
             us.eliminarAdmin((String) empleadosParaEliminar.get(i));
         }
-        
+        empleados = usuario.leerEmpleados();
         this.cargarEmpleados();
     }//GEN-LAST:event_btnQuitarAdmin_AdministrarActionPerformed
 
@@ -246,7 +245,7 @@ public class Pantalla_AdministrarUsuarios extends javax.swing.JFrame {
         for (int i = 0; i < empleadosParaEliminar.size(); i++) {
             us.anadirAdmin((String) empleadosParaEliminar.get(i));
         }
-        
+        empleados = usuario.leerEmpleados();
         this.cargarEmpleados();
     }//GEN-LAST:event_btnAnadirAdmin_AdministrarActionPerformed
 

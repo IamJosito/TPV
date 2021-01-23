@@ -41,6 +41,7 @@ public class Usuario {
             JOptionPane.showMessageDialog(null,"Error al cargar el driver" ,"ERROR", JOptionPane.ERROR_MESSAGE);
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null,"Debes abrir el servidor en XAMPP" ,"ERROR", JOptionPane.ERROR_MESSAGE);
+            System.out.println(ex);
         }
     }
     
@@ -52,6 +53,7 @@ public class Usuario {
             sentencia.close();
             conexion.close();
         } catch (SQLException ex) {
+            System.out.println("ERROR DESCONEXION");
             Logger.getLogger(Usuario.class.getName()).log(Level.SEVERE, null, ex);
         }
         
@@ -108,6 +110,7 @@ public class Usuario {
             boolean existeElUsuario = false;
             String todosLosUsuarios = "SELECT * FROM usuarios";
             ResultSet rs = sentencia.executeQuery(todosLosUsuarios);
+            
             while(rs.next()){
                 if(rs.getString("correo").equals(emp.getCorreo()) && rs.getString("password").equals(emp.getPassword())){
                     existeElUsuario = true;
