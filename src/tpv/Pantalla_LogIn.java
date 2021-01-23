@@ -2,6 +2,9 @@
 package tpv;
 
 
+
+
+
 public class Pantalla_LogIn extends javax.swing.JFrame {
     
     Empleado emp = new Empleado();
@@ -9,10 +12,13 @@ public class Pantalla_LogIn extends javax.swing.JFrame {
     Encriptacion md5 = new Encriptacion();
     private gestionPantallas gp;
     
+    
     public Pantalla_LogIn() {
         initComponents();
         this.setLocationRelativeTo(null);
         gp = new gestionPantallas();
+        
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -24,32 +30,44 @@ public class Pantalla_LogIn extends javax.swing.JFrame {
         lblInicio = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
         txtPasswd_Login = new javax.swing.JPasswordField();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(0, 0, 0));
         setMinimumSize(new java.awt.Dimension(1024, 768));
+        setUndecorated(true);
         setPreferredSize(new java.awt.Dimension(1024, 768));
         setResizable(false);
         setSize(new java.awt.Dimension(1024, 768));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btn_Entrar_LogIn.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        btn_Entrar_LogIn.setBackground(new java.awt.Color(255, 179, 71));
+        btn_Entrar_LogIn.setFont(new java.awt.Font("Monotype Corsiva", 3, 24)); // NOI18N
+        btn_Entrar_LogIn.setForeground(new java.awt.Color(51, 51, 51));
+        btn_Entrar_LogIn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/usuario.png"))); // NOI18N
         btn_Entrar_LogIn.setText("ENTRAR");
         btn_Entrar_LogIn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_Entrar_LogInActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_Entrar_LogIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 430, 210, 80));
+        getContentPane().add(btn_Entrar_LogIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 480, 210, 80));
 
-        lbl_Icono.setText("ICO");
-        getContentPane().add(lbl_Icono, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 180, 50, 30));
+        lbl_Icono.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/genero.png"))); // NOI18N
+        getContentPane().add(lbl_Icono, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 130, 50, 50));
 
-        lblInicio.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        lblInicio.setBackground(new java.awt.Color(255, 127, 15));
+        lblInicio.setFont(new java.awt.Font("Monotype Corsiva", 2, 32)); // NOI18N
+        lblInicio.setForeground(new java.awt.Color(255, 127, 15));
         lblInicio.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblInicio.setText("INICIO SESIÓN");
-        getContentPane().add(lblInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 180, 210, 40));
+        getContentPane().add(lblInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 140, 250, 40));
 
-        txtEmail.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        txtEmail.setBackground(new java.awt.Color(255, 179, 71));
+        txtEmail.setFont(new java.awt.Font("Monotype Corsiva", 0, 18)); // NOI18N
+        txtEmail.setForeground(new java.awt.Color(51, 51, 51));
         txtEmail.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -58,8 +76,26 @@ public class Pantalla_LogIn extends javax.swing.JFrame {
         });
         getContentPane().add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 260, 230, 40));
 
+        txtPasswd_Login.setBackground(new java.awt.Color(255, 179, 71));
+        txtPasswd_Login.setFont(new java.awt.Font("Monotype Corsiva", 0, 18)); // NOI18N
+        txtPasswd_Login.setForeground(new java.awt.Color(51, 51, 51));
         txtPasswd_Login.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        getContentPane().add(txtPasswd_Login, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 340, 230, 40));
+        getContentPane().add(txtPasswd_Login, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 380, 230, 40));
+
+        jPanel1.setBackground(new java.awt.Color(30, 30, 30));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setFont(new java.awt.Font("Monotype Corsiva", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 127, 15));
+        jLabel2.setText("Correo:\n");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 210, 160, 40));
+
+        jLabel3.setFont(new java.awt.Font("Monotype Corsiva", 1, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 127, 15));
+        jLabel3.setText("Contraseña: ");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 320, 160, 40));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1030, 770));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -121,6 +157,9 @@ public class Pantalla_LogIn extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Entrar_LogIn;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblInicio;
     private javax.swing.JLabel lbl_Icono;
     private javax.swing.JTextField txtEmail;
