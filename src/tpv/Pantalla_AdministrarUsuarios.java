@@ -237,7 +237,7 @@ public class Pantalla_AdministrarUsuarios extends javax.swing.JFrame {
         for (int i = 0; i < empleadosParaEliminar.size(); i++) {
             us.borrarEmpleado((String) empleadosParaEliminar.get(i));
         }
-        
+        empleados = us.leerEmpleados();
         this.cargarEmpleados();
     }
     private void addAdmin(java.awt.event.ActionEvent evt){
@@ -245,7 +245,7 @@ public class Pantalla_AdministrarUsuarios extends javax.swing.JFrame {
         for (int i = 0; i < empleadosParaEliminar.size(); i++) {
             us.anadirAdmin((String) empleadosParaEliminar.get(i));
         }
-        
+        empleados = us.leerEmpleados();
         this.cargarEmpleados();
     }
     
@@ -254,7 +254,7 @@ public class Pantalla_AdministrarUsuarios extends javax.swing.JFrame {
         for (int i = 0; i < empleadosParaEliminar.size(); i++) {
             us.eliminarAdmin((String) empleadosParaEliminar.get(i));
         }
-        
+        empleados = us.leerEmpleados();
         this.cargarEmpleados();
     }
     
