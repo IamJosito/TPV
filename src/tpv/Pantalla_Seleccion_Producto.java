@@ -15,6 +15,7 @@ import java.awt.BorderLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 
 public class Pantalla_Seleccion_Producto extends javax.swing.JFrame {
@@ -123,7 +124,7 @@ public class Pantalla_Seleccion_Producto extends javax.swing.JFrame {
             
             //Para dar un salto a la siguiente linea al mostrar nuestros productos.
             if(posX >= 870){
-                posY += 230;
+                posY += 250;
                 posX = 10;
             }
             
@@ -142,21 +143,32 @@ public class Pantalla_Seleccion_Producto extends javax.swing.JFrame {
             //Le seteamos de nombre el codigo de producto para que sea unico y no de fallos.
             imgProducto.setName(String.valueOf(productos.get(i).getCodigoProducto()));
             
-            JLabel datosProducto = new JLabel("<HTML><b>Nombre:</b> "+ String.valueOf(productos.get(i).getNombre()) +" <br> <b>Cantidad:</b> "+ productosCarrito.get(Integer.parseInt(imgProducto.getName())) + " </HTML>");
+            Producto producto = productos.get(i);
+            
+            JLabel datosProducto = new JLabel("<HTML><b>Nombre:</b> "+ String.valueOf(productos.get(i).getNombre()) +
+                    " <br> <b>Cantidad:</b> "+ productosCarrito.get(Integer.parseInt(imgProducto.getName())) + 
+                    " <br> <b>Stock:</b>"+ producto.getStock() +"</HTML>");
             datosProducto.setForeground(Color.white);
             datosProducto.setFont(new Font("Calibri", Font.ITALIC, 15));
             //Mouse listener para cuando cliquemos.
             imgProducto.addMouseListener(new MouseAdapter() {
                 JLabel cantidad = new JLabel("0");
                 int cantidadProductos;
+                
                 public void mouseClicked(MouseEvent e){
-                    if (!productosCarrito.containsKey(Integer.parseInt(imgProducto.getName()))) {
-                        productosCarrito.put(Integer.parseInt(imgProducto.getName()), 1);
+                    
+                    if(producto.getStock() != 0){
+                        producto.setStock(producto.getStock()-1);
+                        if (!productosCarrito.containsKey(Integer.parseInt(imgProducto.getName()))) {
+                            productosCarrito.put(Integer.parseInt(imgProducto.getName()), 1);
+                        }else{
+                            cantidadProductos = productosCarrito.get(Integer.parseInt(imgProducto.getName()));
+                            productosCarrito.put(Integer.parseInt(imgProducto.getName()), cantidadProductos+1);
+                        } 
+                        cargarProductos();
                     }else{
-                        cantidadProductos = productosCarrito.get(Integer.parseInt(imgProducto.getName()));
-                        productosCarrito.put(Integer.parseInt(imgProducto.getName()), cantidadProductos+1);
-                    } 
-                    cargarProductos();
+                        JOptionPane.showMessageDialog(null,"No quedan mas productos en Stock." ,"ERROR", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
                 
             });
@@ -165,7 +177,7 @@ public class Pantalla_Seleccion_Producto extends javax.swing.JFrame {
             
             //agregamos la label a nuestro panel.
             panelProductos_SelecProd.add(imgProducto,new org.netbeans.lib.awtextra.AbsoluteConstraints(posX, posY, 150, 150));
-            panelProductos_SelecProd.add(datosProducto,new org.netbeans.lib.awtextra.AbsoluteConstraints(posX, posY+150, 150, 70));
+            panelProductos_SelecProd.add(datosProducto,new org.netbeans.lib.awtextra.AbsoluteConstraints(posX, posY+150, 150, 90));
             posX += 170;
             //870 limite en X
             

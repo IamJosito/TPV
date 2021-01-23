@@ -1,6 +1,6 @@
-DROP DATABASE IF EXISTS proyectotpv
+DROP DATABASE IF EXISTS proyectotpv;
 CREATE DATABASE proyectotpv;
-USE proyectotpv
+USE proyectotpv;
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
