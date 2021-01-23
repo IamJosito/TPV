@@ -3,21 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
             <file>file:/C:/Users/Jose/Documents/NetBeansProjects/TPV/src/tpv/Usuario.java</file>
             <file>file:/C:/Users/Jose/Documents/NetBeansProjects/TPV/src/tpv/Pantalla_LogIn.java</file>
             <file>file:/C:/Users/Jose/Documents/NetBeansProjects/TPV/src/tpv/Pantalla_Seleccion_Producto.java</file>
+            <file>file:/C:/Users/Jose/Documents/NetBeansProjects/TPV/src/tpv/Ventas.java</file>
+            <file>file:/C:/Users/Jose/Documents/NetBeansProjects/TPV/src/tpv/Pantalla_Administrador.java</file>
+            <file>file:/C:/Users/Jose/Documents/NetBeansProjects/TPV/src/tpv/Pantalla_Carrito.java</file>
             <file>file:/C:/Users/Jose/Documents/NetBeansProjects/TPV/src/tpv/Pantalla_AdministrarUsuarios.java</file>
-=======
-            <file>file:/C:/Users/alvar/Desktop/NetBeans/TPV/src/tpv/Pantalla_Carrito.java</file>
-            <file>file:/C:/Users/alvar/Desktop/NetBeans/TPV/src/tpv/Pantalla_AdministrarUsuarios.java</file>
-            <file>file:/C:/Users/alvar/Desktop/NetBeans/TPV/src/tpv/Pantalla_Seleccion_Producto.java</file>
-            <file>file:/C:/Users/alvar/Desktop/NetBeans/TPV/src/tpv/Pantalla_Administrador.java</file>
-            <file>file:/C:/Users/alvar/Desktop/NetBeans/TPV/src/tpv/Pantalla_LogIn.java</file>
-            <file>file:/C:/Users/alvar/Desktop/NetBeans/TPV/src/tpv/ComponentBorder.java</file>
-            <file>file:/C:/Users/alvar/Desktop/NetBeans/TPV/src/tpv/button.java</file>
-            <file>file:/C:/Users/alvar/Desktop/NetBeans/TPV/src/tpv/Pantalla_Registro.java</file>
->>>>>>> b95a736e972ec6a3c6f31c50ad0fbd54f6ae9fba
         </group>
     </open-files>
 </project-private>
