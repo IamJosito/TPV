@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -73,7 +74,7 @@ public class Pantalla_AdministrarUsuarios extends javax.swing.JFrame {
         
         addAdmin = btn.creaButton("src/assets/add-admin.png","<html><body>AÑADIR <br>ADMIN</body></html>",19);
         
-        panelMenuSelecProd.add(addAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 10, 120, 110));
+        panelMenuSelecProd.add(addAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 10, 120, 110));
         addAdmin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addAdmin(evt);
@@ -82,7 +83,7 @@ public class Pantalla_AdministrarUsuarios extends javax.swing.JFrame {
         
         remvAdmin = btn.creaButton("src/assets/remove-admin.png","<html><body>QUITAR <br>ADMIN</body></html>",19);
         
-        panelMenuSelecProd.add(remvAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 10, 120, 110));
+        panelMenuSelecProd.add(remvAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 10, 120, 110));
         remvAdmin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 removeAdmin(evt);
@@ -104,6 +105,31 @@ public class Pantalla_AdministrarUsuarios extends javax.swing.JFrame {
         volver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 volver(evt);
+            }
+        });
+        
+        JButton informeVendedores = btn.creaButton(null,"VEND.",19);
+        
+        panelMenuSelecProd.add(informeVendedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 10, 130, 55));
+        informeVendedores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                try {
+                    Informes informe = new Informes();
+                    PantallaInforme pInforme = new PantallaInforme(informe.crearInformeVendedores());
+                    pInforme.setVisible(true);
+                } catch (SQLException ex) {
+                    System.out.println("ERROOOOOR");
+                    //Logger.getLogger(Pantalla_AdministrarUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+        
+        JButton informeCompras = btn.creaButton(null,"COMPRAS",19);
+        
+        panelMenuSelecProd.add(informeCompras, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 65, 130, 55));
+        informeCompras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                new Pantalla_Seleccion_Cantidad_Compras().setVisible(true);
             }
         });
     }

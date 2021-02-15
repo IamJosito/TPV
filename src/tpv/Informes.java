@@ -25,7 +25,7 @@ public class Informes {
     
     }
     
-    public JRViewer crearInformeVentas() throws SQLException{
+    public JRViewer crearInformeVentas(String fecha, String fecha2) throws SQLException{
         //Impresión del informe
         JasperPrint jp = null;
         //El visor del informe
@@ -33,26 +33,26 @@ public class Informes {
         //Ruta de la plantilla del reporte
         String ficheroReporte = "reports\\InformeVentas.jrxml";
         //Parametros Map
-        HashMap<String, Object> parameterMap = new
-        HashMap<String, Object>();
+        HashMap<String, Object> parameterMap = new HashMap<String, Object>();
         //conexión con la BD
         Connection conexion;
         try {
             // Cargar el driver
             Class.forName("com.mysql.cj.jdbc.Driver");
             //Establecemos conexion con la BD
-            conexion = DriverManager.getConnection("jdbc:mysql://localhost/proyectoTPV?serverTimezone=UTC", "root", "");
+            conexion = DriverManager.getConnection("jdbc:mysql://localhost/proyectotpv?serverTimezone=UTC", "root", "");
             //Compilamos el fichero de reporte
             JasperReport reporteCompilado = JasperCompileManager.compileReport(ficheroReporte);
             //Establecemos los parametros del reporte
             
-            // parameterMap.put("sueldoDesde", 2000); //CAMBIAR EL PARAMETRO PARA LA FEHCA
+            parameterMap.put("fechaIngresada1", fecha);
+            parameterMap.put("fechaIngresada2", fecha2);
             
             //Rellenamos el reporte con los parametros,conexion and the stream reader
             jp = JasperFillManager.fillReport(reporteCompilado, parameterMap,conexion);
         } catch (ClassNotFoundException | SQLException | JRException ex) {
             System.out.println(ex);
-        }
+        } 
         viewer = new JRViewer(jp);
         return viewer;
     }
@@ -64,9 +64,7 @@ public class Informes {
         JRViewer viewer;
         //Ruta de la plantilla del reporte
         String ficheroReporte = "reports\\InformeVendedores.jrxml";
-        //Parametros Map
-        HashMap<String, Object> parameterMap = new
-        HashMap<String, Object>();
+        
         //conexión con la BD
         Connection conexion;
         try {
@@ -78,7 +76,7 @@ public class Informes {
             JasperReport reporteCompilado = JasperCompileManager.compileReport(ficheroReporte);
             
             //Rellenamos el reporte con los parametros,conexion and the stream reader
-            jp = JasperFillManager.fillReport(reporteCompilado, parameterMap,conexion);
+            jp = JasperFillManager.fillReport(reporteCompilado,null,conexion);
         } catch (ClassNotFoundException | SQLException | JRException ex) {
             System.out.println(ex);
         }
@@ -86,7 +84,7 @@ public class Informes {
         return viewer;
     }
     
-    public JRViewer crearInformeCompras() throws SQLException{
+    public JRViewer crearInformeCompras(int stockMin) throws SQLException{
         //Impresión del informe
         JasperPrint jp = null;
         //El visor del informe
@@ -94,8 +92,7 @@ public class Informes {
         //Ruta de la plantilla del reporte
         String ficheroReporte = "reports\\InformeCompras.jrxml";
         //Parametros Map
-        HashMap<String, Object> parameterMap = new
-        HashMap<String, Object>();
+        HashMap<String, Object> parameterMap = new HashMap<String, Object>();
         //conexión con la BD
         Connection conexion;
         try {
@@ -107,7 +104,7 @@ public class Informes {
             JasperReport reporteCompilado = JasperCompileManager.compileReport(ficheroReporte);
             //Establecemos los parametros del reporte
             
-            // parameterMap.put("sueldoDesde", 2000); //CAMBIAR EL PARAMETRO PARA SELECCIONAR EL STOCK
+            parameterMap.put("stockIngresado", stockMin);
             
             //Rellenamos el reporte con los parametros,conexion and the stream reader
             jp = JasperFillManager.fillReport(reporteCompilado, parameterMap,conexion);

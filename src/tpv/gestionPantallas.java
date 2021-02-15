@@ -38,4 +38,8 @@ public class gestionPantallas {
         Pantalla_AdministrarUsuarios pau = new Pantalla_AdministrarUsuarios(emp);
         pau.setVisible(true);
     }
+    
+    protected void creaInformeVenta(){
+        
+    }
 }

@@ -26,6 +26,7 @@ public class Pantalla_Carrito extends javax.swing.JFrame {
     private JButton volver;
     private JButton tarjeta;
     private JButton efectivo;
+    private JButton informeVentas;
     
     
     public Pantalla_Carrito() {
@@ -76,6 +77,13 @@ public class Pantalla_Carrito extends javax.swing.JFrame {
             }
         });
         
+        informeVentas = btn.creaButton(null,"Informe",19);
+        panelMenuSelecProd.add(informeVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 10, 120, 110));
+        informeVentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                new Pantalla_Seleccion_Fecha_Informe().setVisible(true);
+            }
+        });
     }
 
     public void cargaProducto(){
@@ -240,6 +248,13 @@ public class Pantalla_Carrito extends javax.swing.JFrame {
         }else{
             JOptionPane.showMessageDialog(null,"Tu carrito está vacío." ,"ERROR", JOptionPane.ERROR_MESSAGE);
         }
+    }
+    
+    private void generarInforme(java.awt.event.ActionEvent evt){
+        
+        gp.creaSeleccionProducto(empleadoLogeado, productosCarrito);
+        dispose();
+        
     }
     
 
